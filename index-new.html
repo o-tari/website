@@ -227,6 +227,117 @@
             text-align: center;
         }
         
+        .audio-player {
+            width: 600px;
+            height: 80px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
+            position: relative;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .play-pause-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #9ca3af;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-pause-btn:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 0.25rem;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: #374151;
+            border-radius: 2px;
+            cursor: pointer;
+            appearance: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #6b7280;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #6b7280;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
         .loading {
             text-align: center;
             padding: 2rem;
@@ -359,6 +470,12 @@
                 height: 100px;
             }
             
+            .audio-player {
+                width: 100%;
+                max-width: 500px;
+                height: 100px;
+            }
+            
             .dock {
                 padding: 1rem 0;
             }
@@ -422,6 +539,11 @@
                 height: 90px;
             }
             
+            .audio-player {
+                max-width: 400px;
+                height: 90px;
+            }
+            
             .dock {
                 padding: 0.5rem 0;
             }
@@ -481,6 +603,11 @@
             }
             
             .spotify-player {
+                max-width: 320px;
+                height: 80px;
+            }
+            
+            .audio-player {
                 max-width: 320px;
                 height: 80px;
             }
@@ -656,17 +783,114 @@
     musicData: [],
     currentMusicIndex: 0,
     loading: false,
+    audioPlayer: null,
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 1,
     
     async loadMusic() {
         this.loading = true;
         try {
             const response = await fetch('./music.json');
             this.musicData = await response.json();
+            this.initAudioPlayer();
+            // Load the first track after initialization
+            setTimeout(() => {
+                if (this.currentMusic && this.currentMusic.tracks) {
+                    this.loadTrack();
+                }
+            }, 200);
         } catch (error) {
             console.error('Error loading music:', error);
         } finally {
             this.loading = false;
         }
+    },
+    
+    initAudioPlayer() {
+        this.audioPlayer = new Audio();
+        this.audioPlayer.addEventListener('timeupdate', () => {
+            this.currentTime = this.audioPlayer.currentTime;
+        });
+        this.audioPlayer.addEventListener('loadedmetadata', () => {
+            this.duration = this.audioPlayer.duration;
+            console.log('Audio loaded:', this.audioPlayer.src, 'Duration:', this.duration);
+        });
+        this.audioPlayer.addEventListener('ended', () => {
+            this.isPlaying = false;
+            this.nextMusic();
+        });
+        this.audioPlayer.addEventListener('play', () => {
+            this.isPlaying = true;
+            console.log('Audio started playing');
+        });
+        this.audioPlayer.addEventListener('pause', () => {
+            this.isPlaying = false;
+            console.log('Audio paused');
+        });
+        this.audioPlayer.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+        this.audioPlayer.addEventListener('loadstart', () => {
+            console.log('Audio loading started');
+        });
+        this.audioPlayer.addEventListener('canplay', () => {
+            console.log('Audio can play');
+        });
+    },
+    
+    loadTrack() {
+        if (this.audioPlayer && this.currentMusic && this.currentMusic.tracks && this.currentMusic.tracks.length > 0) {
+            const track = this.currentMusic.tracks[0];
+            const audioSrc = `./tracks/${track.file}`;
+            console.log('Loading track:', audioSrc);
+            this.audioPlayer.src = audioSrc;
+            this.audioPlayer.load();
+        } else {
+            console.log('Audio player not ready or no track data available:', {
+                audioPlayer: !!this.audioPlayer,
+                currentMusic: this.currentMusic,
+                tracks: this.currentMusic?.tracks
+            });
+        }
+    },
+    
+    togglePlayPause() {
+        if (this.audioPlayer && this.currentMusic && this.currentMusic.tracks && this.currentMusic.tracks.length > 0) {
+            if (this.isPlaying) {
+                this.audioPlayer.pause();
+            } else {
+                this.audioPlayer.play().catch(error => {
+                    console.error('Error playing audio:', error);
+                });
+            }
+        } else {
+            console.log('Cannot play: audio player or track not ready');
+        }
+    },
+    
+    seekTo(event) {
+        if (this.audioPlayer && this.duration) {
+            const rect = event.target.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percentage = clickX / rect.width;
+            this.audioPlayer.currentTime = percentage * this.duration;
+        }
+    },
+    
+    setVolume(event) {
+        if (this.audioPlayer) {
+            this.volume = event.target.value;
+            this.audioPlayer.volume = this.volume;
+        }
+    },
+    
+    formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     },
     
     nextMusic() {
@@ -675,6 +899,7 @@
             setTimeout(() => {
                 this.currentMusicIndex++;
                 this.scrollToActiveDockItem();
+                this.loadTrack();
             }, 300);
         }
     },
@@ -685,6 +910,7 @@
             setTimeout(() => {
                 this.currentMusicIndex--;
                 this.scrollToActiveDockItem();
+                this.loadTrack();
             }, 300);
         }
     },
@@ -758,6 +984,7 @@
                 setTimeout(() => {
                     this.currentMusicIndex = index;
                     this.scrollToActiveDockItem();
+                    this.loadTrack();
                 }, 300);
             });
         }
@@ -805,7 +1032,7 @@
     },
     
     get currentMusicId() {
-        return this.currentMusic?.id || '';
+        return this.currentMusic?.tracks?.[0]?.file || '';
     }
 }" x-init="loadMusic()">
     <div class="page-background current" :style="`background-image: url('${currentMusicImage}')`"></div>
@@ -841,17 +1068,26 @@
         </div>
     </div>
     
-    <!-- Spotify Player -->
+    <!-- Audio Player -->
     <div class="spotify-section">
         <template x-if="!loading && currentMusic">
-            <iframe 
-                :src="`https://open.spotify.com/embed/album/${currentMusicId}?utm_source=generator`"
-                class="spotify-player"
-                frameborder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-            </iframe>
+            <div class="audio-player">
+                <div class="progress-container" @click="seekTo($event)">
+                    <div class="progress-bar" :style="`width: ${duration > 0 ? (currentTime / duration) * 100 : 0}%`"></div>
+                </div>
+                
+                <div class="time-display">
+                    <span x-text="formatTime(currentTime)"></span>
+                    <span x-text="formatTime(duration)"></span>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="play-pause-btn" @click="togglePlayPause()" x-text="isPlaying ? '⏸' : '▶'"></button>
+                    <div class="volume-control">
+                        <input type="range" class="volume-slider" min="0" max="1" step="0.1" :value="volume" @input="setVolume($event)">
+                    </div>
+                </div>
+            </div>
         </template>
     </div>
     
