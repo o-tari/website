@@ -1934,3 +1934,85 @@ textarea.form-input::-webkit-resizer { display: none; }
     border-radius: 6px;
     border: 1px solid var(--jet);
 }
+
+/**
+ * MISSING UTILITY CLASSES FOR LAYOUT FIXES
+ */
+
+/* Minimum height utilities */
+.min-h-\[600px\] {
+    min-height: 600px;
+}
+
+/* Flex utilities */
+.items-center {
+    align-items: center;
+}
+
+/* Width utilities */
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.h-\[320px\] {
+    height: 320px;
+}
+
+.h-\[200px\] {
+    height: 200px;
+}
+
+/* Display utilities */
+.block {
+    display: block;
+}
+
+/* Object fit utilities */
+.object-cover {
+    object-fit: cover;
+}
+
+/* Animation utilities */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Border utilities */
+.border-b-2 {
+    border-bottom-width: 2px;
+}
+
+.border-yellow-500 {
+    border-color: var(--orange-yellow-crayola);
+}
+
+/* Text utilities */
+.text-gray-400 {
+    color: hsl(0, 0%, 60%);
+}
+
+/* Spacing utilities */
+.h-12 {
+    height: 3rem;
+}
+
+.w-12 {
+    width: 3rem;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
