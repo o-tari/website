@@ -21,197 +21,143 @@
     <link rel="stylesheet" href="../../tailwind.css">
     <link rel="stylesheet" href="../../app.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://i.scdn.co/image/ab67616d0000b2732f35e36aa569fd40c79b40e6');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #1DB954;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .spotify-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spotify-container.loaded {
+            opacity: 1;
+        }
+        
+        .spotify-player {
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: none;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-<main x-data="{
-page: 'music',
-}">
-    <aside class="sidebar" data-sidebar>
-
-        <div class="sidebar-info">
-
-            <figure class="avatar-box">
-                <img src="../../assets/imcool.png" class="rounded-3xl" alt="Oto Kapanadze" width="80">
-            </figure>
-
-            <div class="info-content">
-                <h1 class="name" title="Oto Kapanadze">Oto Kapanadze</h1>
-            </div>
-
-            <button @click="toggle()" class="info_more-btn" data-sidebar-btn>
-                <span>Show Contacts</span>
-
-                <ion-icon name="chevron-down"></ion-icon>
-            </button>
-
-        </div>
-
-        <div class="sidebar-info_more">
-
-            <div class="separator"></div>
-
-            <ul class="contacts-list">
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="mail-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Email</p>
-
-                        <a href="mailto:info@otokapanadze.com" class="contact-link">info@otokapanadze.com</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <svg class="fill-current text-yellow-500" width="40" viewBox="0 0 512 153"
-                             xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-                            <path d="M140.107 96.628c-8.321 0-16.118-3.523-23.202-9.258l1.725-8.096.075-.3c1.536-8.62 6.409-23.089 21.402-23.089 11.244 0 20.39 9.146 20.39 20.39-.038 11.207-9.183 20.353-20.39 20.353zm0-61.395c-19.154 0-33.996 12.444-40.03 32.909-9.221-13.831-16.193-30.435-20.278-44.416H59.184v53.636c0 10.57-8.621 19.19-19.191 19.19-10.57 0-19.19-8.62-19.19-19.19V23.726H.186v53.636c-.075 21.965 17.804 39.993 39.768 39.993 21.965 0 39.844-18.028 39.844-39.993v-8.995c4.01 8.358 8.92 16.791 14.88 24.288l-12.632 59.37h21.103l9.145-43.066c8.021 5.135 17.242 8.359 27.812 8.359 22.601 0 41.005-18.516 41.005-41.118 0-22.564-18.404-40.967-41.005-40.967z"
-                                  fill="#6FDA44"/>
-                            <path d="M244.043 37.557l13.306 53.636 14.656-53.636h17.466l-22.526 77.512h-17.467l-13.83-53.974-13.794 53.936h-17.466L181.86 37.52h17.467l14.655 53.636 13.306-53.636h16.754v.038zm87.22-2.324c-22.676 0-41.042 18.403-41.042 41.042 0 22.677 18.403 41.043 41.042 41.043 22.677 0 41.08-18.366 41.08-41.043 0-22.676-18.403-41.042-41.08-41.042zm0 65.218c-13.343 0-24.138-10.795-24.138-24.138 0-13.344 10.832-24.138 24.138-24.138 13.344 0 24.138 10.794 24.138 24.138 0 13.306-10.794 24.138-24.138 24.138zm90.968-45.54c-11.731 0-21.214 9.52-21.214 21.214v38.906h-17.58V37.557h17.58v11.919s7.496-11.957 22.901-11.957h5.397v17.392h-7.084zm58.997 18.366c12.48-7.047 20.952-20.428 20.952-35.758H484.6c0 12.931-10.494 23.426-23.425 23.426h-2.362V.15h-17.578V115.03h17.578V78.524h2.1c1.724 0 3.973 1.125 4.985 2.511l24.962 33.996h21.065l-30.697-41.754z"/>
-                        </svg>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Upwork</p>
-
-                        <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" class="contact-link"
-                           target="_blank">Oto Kapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="logo-github"/>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Github</p>
-
-                        <a href="https://github.com/otokapanadze" class="contact-link" target="_blank">otokapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="location-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Location</p>
-
-                        <address>Tbilisi, Georgia</address>
-                    </div>
-
-                </li>
-
-            </ul>
-
-            <div class="separator"></div>
-
-            <ul class="social-list">
-                <li class="social-item">
-                    <a href="https://www.instagram.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://www.facebook.com/otokapanadzeofficial/" target="_blank" class="social-link">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://twitter.com/Oto_Kapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://soundcloud.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-soundcloud"></ion-icon>
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </aside>
-
-    <div class="main-content">
-        <nav class="navbar">
-
-            <ul class="navbar-list">
-
-                <li class="navbar-item">
-                    <a href="../../index.html" class="navbar-link">About</a>
-                </li>
-
-                <li class="navbar-item">
-                    <a href="../../index.html#music" class="navbar-link active">Music</a>
-                </li>
-
-                <li class="navbar-item">
-                    <a href="../../index.html#projects" class="navbar-link">Projects</a>
-                </li>
-            </ul>
-
-        </nav>
-
-        <article class="portfolio active">
-
-            <header>
-                <h2 class="h2 article-title">Dot Between Saturn's Rings</h2>
-                <p class="text-gray-400 mb-4">by Oto Kapanadze</p>
-            </header>
-
-            <section class="music-detail">
-                <div class="music-content">
-                    <div class="music-cover mb-6">
-                        <img src="https://i.scdn.co/image/ab67616d0000b2732f35e36aa569fd40c79b40e6" 
-                             alt="Dot Between Saturn's Rings Album Cover" 
-                             class="w-64 h-64 object-cover rounded-lg shadow-lg">
-                    </div>
-                    
-                    <div class="spotify-player mb-6">
-                        <iframe style="border-radius:12px" 
-                                src="https://open.spotify.com/embed/album/6ModgEkKvncXj4i7zqL8dC?utm_source=generator" 
-                                width="100%" 
-                                height="352" 
-                                frameborder="0" 
-                                allowfullscreen="" 
-                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                loading="lazy">
-                        </iframe>
-                    </div>
-                    
-                    <div class="music-actions">
-                        <a href="https://open.spotify.com/album/6ModgEkKvncXj4i7zqL8dC" 
-                           target="_blank" 
-                           class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                            <ion-icon name="logo-spotify" class="mr-2"></ion-icon>
-                            Listen on Spotify
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-        </article>
+    <button class="back-button" onclick="window.location.href='../../index.html'">
+        ← Back to Site
+    </button>
+    
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading Spotify Player...</div>
     </div>
-</main>
-
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <div class="spotify-container" id="spotifyContainer">
+        <div class="spotify-player">
+            <iframe style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/album/6ModgEkKvncXj4i7zqL8dC?utm_source=generator" 
+                    width="100%" 
+                    height="352" 
+                    frameborder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                    onload="hideLoading()">
+            </iframe>
+        </div>
+    </div>
+    
+    <script>
+        function hideLoading() {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const spotifyContainer = document.getElementById('spotifyContainer');
+            
+            // Hide loading spinner
+            loadingSpinner.style.display = 'none';
+            
+            // Show spotify container with fade-in effect
+            spotifyContainer.classList.add('loaded');
+        }
+        
+        // Fallback: hide loading after 5 seconds if iframe doesn't load
+        setTimeout(function() {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            if (loadingSpinner.style.display !== 'none') {
+                hideLoading();
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
