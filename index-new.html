@@ -241,6 +241,35 @@
             align-items: center;
             gap: 0.25rem;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .waveform-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+            gap: 2px;
+            z-index: 1;
+            padding: 0.5rem;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .player-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
         }
         
         .audio-controls {
@@ -303,6 +332,150 @@
             align-items: center;
             width: 100%;
             margin-top: 0.25rem;
+        }
+        
+        .waveform-container {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 20px;
+            margin: 0 1rem;
+        }
+        
+        /* Style 1: Classic Bars */
+        .waveform-bar.classic {
+            width: 3px;
+            background: rgba(59, 130, 246, 0.4);
+            border-radius: 2px;
+            animation: waveform-classic 1.5s ease-in-out infinite;
+            min-height: 6px;
+            max-height: 30px;
+        }
+        
+        @keyframes waveform-classic {
+            0%, 100% {
+                height: 6px;
+                opacity: 0.3;
+            }
+            50% {
+                height: 30px;
+                opacity: 0.8;
+            }
+        }
+        
+        /* Style 2: Dots */
+        .waveform-dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(16, 185, 129, 0.5);
+            border-radius: 50%;
+            animation: waveform-dot 1.2s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-dot {
+            0%, 100% {
+                transform: scale(0.4);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.8);
+                opacity: 0.9;
+            }
+        }
+        
+        /* Style 3: Pulse */
+        .waveform-pulse {
+            width: 5px;
+            height: 5px;
+            background: rgba(245, 158, 11, 0.5);
+            border-radius: 50%;
+            animation: waveform-pulse 1s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-pulse {
+            0%, 100% {
+                transform: scale(0.3);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(2.5);
+                opacity: 0.8;
+            }
+        }
+        
+        /* Style 4: Equalizer */
+        .waveform-eq {
+            width: 2px;
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 1px;
+            animation: waveform-eq 1.8s ease-in-out infinite;
+            min-height: 3px;
+            max-height: 25px;
+        }
+        
+        @keyframes waveform-eq {
+            0%, 100% {
+                height: 3px;
+                opacity: 0.3;
+            }
+            25% {
+                height: 12px;
+                opacity: 0.6;
+            }
+            50% {
+                height: 25px;
+                opacity: 0.9;
+            }
+            75% {
+                height: 15px;
+                opacity: 0.7;
+            }
+        }
+        
+        /* Style 5: Rings */
+        .waveform-ring {
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(236, 72, 153, 0.6);
+            border-radius: 50%;
+            animation: waveform-ring 2s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-ring {
+            0%, 100% {
+                transform: scale(0.5);
+                opacity: 0.2;
+                border-width: 1px;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.8;
+                border-width: 3px;
+            }
+        }
+        
+        /* Style 6: Stars */
+        .waveform-star {
+            width: 6px;
+            height: 6px;
+            background: rgba(168, 85, 247, 0.6);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: waveform-star 1.5s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-star {
+            0%, 100% {
+                transform: scale(0.3) rotate(0deg);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0.9;
+            }
         }
         
         .volume-control {
@@ -1072,19 +1245,129 @@
     <div class="spotify-section">
         <template x-if="!loading && currentMusic">
             <div class="audio-player">
-                <div class="progress-container" @click="seekTo($event)">
-                    <div class="progress-bar" :style="`width: ${duration > 0 ? (currentTime / duration) * 100 : 0}%`"></div>
+                <!-- Waveform Background -->
+                <div class="waveform-background" x-show="isPlaying">
+                    <!-- Style 1: Classic Bars - More bars -->
+                    <div class="waveform-bar classic" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 50ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 100ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 150ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 250ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 350ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 450ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 500ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 550ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 650ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 700ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 750ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 850ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 950ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1050ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1100ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1150ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1250ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1300ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1350ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1400ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1450ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 2: Dots - More dots -->
+                    <div class="waveform-dot" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 100ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 500ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 700ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1100ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1300ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1400ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 3: Pulse - More pulses -->
+                    <div class="waveform-pulse" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 150ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 450ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 750ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1050ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1350ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 4: Equalizer - More bars -->
+                    <div class="waveform-eq" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 80ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 160ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 240ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 320ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 480ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 560ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 640ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 720ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 880ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 960ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1040ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1120ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1280ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1360ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1440ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1520ms;"></div>
+                    
+                    <!-- Style 5: Rings -->
+                    <div class="waveform-ring" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1400ms;"></div>
+                    
+                    <!-- Style 6: Stars -->
+                    <div class="waveform-star" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 1500ms;"></div>
                 </div>
                 
-                <div class="time-display">
-                    <span x-text="formatTime(currentTime)"></span>
-                    <span x-text="formatTime(duration)"></span>
-                </div>
-                
-                <div class="player-controls">
-                    <button class="play-pause-btn" @click="togglePlayPause()" x-text="isPlaying ? '⏸' : '▶'"></button>
-                    <div class="volume-control">
-                        <input type="range" class="volume-slider" min="0" max="1" step="0.1" :value="volume" @input="setVolume($event)">
+                <!-- Player Content -->
+                <div class="player-content">
+                    <div class="progress-container" @click="seekTo($event)">
+                        <div class="progress-bar" :style="`width: ${duration > 0 ? (currentTime / duration) * 100 : 0}%`"></div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <span x-text="formatTime(currentTime)"></span>
+                        <span x-text="formatTime(duration)"></span>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button class="play-pause-btn" @click="togglePlayPause()" x-text="isPlaying ? '⏸' : '▶'"></button>
+                        <div class="volume-control">
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" :value="volume" @input="setVolume($event)">
+                        </div>
                     </div>
                 </div>
             </div>
