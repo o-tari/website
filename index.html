@@ -702,21 +702,23 @@ itemsPerPage: 9,
                         <ul class="project-list">
                         <template x-for="project in projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="project.id">
                             <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <a :href="project.url" target="_blank" class="h-full block">
-                                    <figure class="project-img h-[200px] w-full">
-                                        <div class="project-item-icon-box">
-                                            <ion-icon name="eye-outline"></ion-icon>
-                                        </div>
-                                        <img :src="project.image" :alt="project.name" loading="lazy" class="w-full h-full object-cover" />
-                                    </figure>
-                                    <h3 class="project-title" x-text="project.name"></h3>
-                                    <p class="project-category">
-                                        <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400">
+                                <div class="h-full block">
+                                    <a :href="project.url" target="_blank" class="block">
+                                        <figure class="project-img h-[200px] w-full">
+                                            <div class="project-item-icon-box">
+                                                <ion-icon name="eye-outline"></ion-icon>
+                                            </div>
+                                            <img :src="project.image" :alt="project.name" loading="lazy" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <h3 class="project-title" x-text="project.name"></h3>
+                                    </a>
+                                    <div class="project-category mt-2">
+                                        <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400 text-sm">
                                             <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
                                             View on GitHub
                                         </a>
-                                    </p>
-                                </a>
+                                    </div>
+                                </div>
                             </li>
                         </template>
                                             </ul>

@@ -2016,3 +2016,14 @@ textarea.form-input::-webkit-resizer { display: none; }
 .rounded-full {
     border-radius: 9999px;
 }
+
+/* Margin utilities */
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+/* Text size utilities */
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
