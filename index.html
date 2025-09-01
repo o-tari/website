@@ -17,6 +17,9 @@
 <main x-data="{
 page: 'about',
 albums: [],
+projects: [],
+currentPage: 1,
+itemsPerPage: 9,
             loading: false,
 }">
     <aside class="sidebar" data-sidebar>
@@ -153,6 +156,10 @@ albums: [],
 
                 <li class="navbar-item">
                     <button class="navbar-link" x-on:click="page = 'music'" :class="page === 'music' ? 'active' : ''">Music</button>
+                </li>
+
+                <li class="navbar-item">
+                    <button class="navbar-link" x-on:click="page = 'projects'" :class="page === 'projects' ? 'active' : ''">Projects</button>
                 </li>
             </ul>
 
@@ -519,8 +526,16 @@ albums: [],
             <section class="projects"
                      x-init="$watch('page', async (value) => {
                     if (value === 'music') {
-                        const response = await fetch('./music.json');
-                          albums = await response.json();
+                        loading = true;
+                        try {
+                            const response = await fetch('./music.json');
+                            albums = await response.json();
+                            currentPage = 1;
+                        } catch (error) {
+                            console.error('Error loading music:', error);
+                        } finally {
+                            loading = false;
+                        }
                     }
                 })"
             >
@@ -531,8 +546,9 @@ albums: [],
                 </template>
 
                 <template x-if="albums.length">
-                    <ul class="project-list">
-                        <template x-for="album in albums" :key="album.id">
+                    <div>
+                        <ul class="project-list">
+                        <template x-for="album in albums.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="album.id">
                             <li class="project-item active" data-filter-item data-category="web development">
                                 <a :href="`https://open.spotify.com/album/${album.id}`" target="_blank">
                                     <figure class="project-img">
@@ -546,7 +562,128 @@ albums: [],
                                 </a>
                             </li>
                         </template>
-                    </ul>
+                                            </ul>
+
+                        <!-- Pagination -->
+                        <div class="pagination-wrapper" x-show="albums.length > itemsPerPage">
+                        <div class="pagination">
+                            <button 
+                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
+                                :disabled="currentPage === 1"
+                                class="pagination-btn"
+                                :class="currentPage === 1 ? 'disabled' : ''"
+                            >
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                                Previous
+                            </button>
+                            
+                            <div class="pagination-info">
+                                <span x-text="`Page ${currentPage} of ${Math.ceil(albums.length / itemsPerPage)}`"></span>
+                            </div>
+                            
+                            <button 
+                                x-on:click="currentPage = Math.min(Math.ceil(albums.length / itemsPerPage), currentPage + 1)" 
+                                :disabled="currentPage >= Math.ceil(albums.length / itemsPerPage)"
+                                class="pagination-btn"
+                                :class="currentPage >= Math.ceil(albums.length / itemsPerPage) ? 'disabled' : ''"
+                            >
+                                Next
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </template>
+            </section>
+
+        </article>
+
+
+        <article
+                class="portfolio"
+                data-page="projects"
+                :class="page === 'projects' ? 'active' : ''"
+        >
+
+            <header>
+                <h2 class="h2 article-title">Projects</h2>
+            </header>
+
+            <section class="projects"
+                     x-init="$watch('page', async (value) => {
+                    if (value === 'projects') {
+                        loading = true;
+                        try {
+                            const response = await fetch('./projects.json');
+                            projects = await response.json();
+                            currentPage = 1;
+                        } catch (error) {
+                            console.error('Error loading projects:', error);
+                        } finally {
+                            loading = false;
+                        }
+                    }
+                })"
+            >
+                <template x-if="loading">
+                    <div class="flex justify-center w-full">
+                        <x-tiny-spinner />
+                    </div>
+                </template>
+
+                <template x-if="projects.length">
+                    <div>
+                        <ul class="project-list">
+                        <template x-for="project in projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="project.id">
+                            <li class="project-item active" data-filter-item data-category="web development">
+                                <a :href="project.url" target="_blank">
+                                    <figure class="project-img">
+                                        <div class="project-item-icon-box">
+                                            <ion-icon name="eye-outline"></ion-icon>
+                                        </div>
+                                        <img :src="project.image" :alt="project.name" loading="lazy" />
+                                    </figure>
+                                    <h3 class="project-title" x-text="project.name"></h3>
+                                    <p class="project-category">
+                                        <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400">
+                                            <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
+                                            View on GitHub
+                                        </a>
+                                    </p>
+                                </a>
+                            </li>
+                        </template>
+                                            </ul>
+
+                        <!-- Pagination -->
+                        <div class="pagination-wrapper" x-show="projects.length > itemsPerPage">
+                        <div class="pagination">
+                            <button 
+                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
+                                :disabled="currentPage === 1"
+                                class="pagination-btn"
+                                :class="currentPage === 1 ? 'disabled' : ''"
+                            >
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                                Previous
+                            </button>
+                            
+                            <div class="pagination-info">
+                                <span x-text="`Page ${currentPage} of ${Math.ceil(projects.length / itemsPerPage)}`"></span>
+                            </div>
+                            
+                            <button 
+                                x-on:click="currentPage = Math.min(Math.ceil(projects.length / itemsPerPage), currentPage + 1)" 
+                                :disabled="currentPage >= Math.ceil(projects.length / itemsPerPage)"
+                                class="pagination-btn"
+                                :class="currentPage >= Math.ceil(projects.length / itemsPerPage) ? 'disabled' : ''"
+                            >
+                                Next
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
                 </template>
             </section>
 

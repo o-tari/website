@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "E-Commerce Platform",
+    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+    "url": "https://example-ecommerce.com",
+    "github_url": "https://github.com/otokapanadze/ecommerce-platform"
+  },
+  {
+    "id": 2,
+    "name": "Task Management App",
+    "image": "https://images.unsplash.com/photo-1484480974693-6ca2a3290bf8?w=400&h=300&fit=crop",
+    "url": "https://taskmanager.example.com",
+    "github_url": "https://github.com/otokapanadze/task-manager"
+  },
+  {
+    "id": 3,
+    "name": "Blog CMS",
+    "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop",
+    "url": "https://blog.example.com",
+    "github_url": "https://github.com/otokapanadze/blog-cms"
+  },
+  {
+    "id": 4,
+    "name": "API Gateway",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop",
+    "url": "https://api.example.com",
+    "github_url": "https://github.com/otokapanadze/api-gateway"
+  },
+  {
+    "id": 5,
+    "name": "Real-time Chat",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    "url": "https://chat.example.com",
+    "github_url": "https://github.com/otokapanadze/realtime-chat"
+  },
+  {
+    "id": 6,
+    "name": "Inventory System",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    "url": "https://inventory.example.com",
+    "github_url": "https://github.com/otokapanadze/inventory-system"
+  },
+  {
+    "id": 7,
+    "name": "Weather Dashboard",
+    "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop",
+    "url": "https://weather.example.com",
+    "github_url": "https://github.com/otokapanadze/weather-dashboard"
+  },
+  {
+    "id": 8,
+    "name": "Portfolio Website",
+    "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
+    "url": "https://portfolio.example.com",
+    "github_url": "https://github.com/otokapanadze/portfolio-website"
+  },
+  {
+    "id": 9,
+    "name": "Social Media API",
+    "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop",
+    "url": "https://social.example.com",
+    "github_url": "https://github.com/otokapanadze/social-media-api"
+  },
+  {
+    "id": 10,
+    "name": "Learning Management System",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
+    "url": "https://lms.example.com",
+    "github_url": "https://github.com/otokapanadze/lms-platform"
+  }
+]
