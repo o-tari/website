@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Oto Kapanadze - Music</title>
+    <meta name="description" content="Listen to music by Oto Kapanadze - Full Stack Developer and Music Producer">
+    <meta name="keywords" content="Oto Kapanadze, Music, Electronic, Trance, Ambient, Spotify">
+    <meta property="og:title" content="Oto Kapanadze - Music">
+    <meta property="og:description" content="Listen to music by Oto Kapanadze">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/imcool.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oto Kapanadze - Music">
+    <meta name="twitter:description" content="Listen to music by Oto Kapanadze">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="tailwind.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8fafc;
+            --accent: #f59e0b;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --border: #e5e7eb;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Figtree', sans-serif;
+            background: #000000;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: visible;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            overflow: visible;
+        }
+        
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(20px);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+        
+        .page-background.current {
+            opacity: 1;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-background.next {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-wrapper {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .content-slide {
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), scale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(0) scale(1);
+            opacity: 1;
+        }
+        
+        .content-slide.slide-out-left {
+            transform: translateX(-20%) scale(0.9);
+            opacity: 0;
+        }
+        
+        .content-slide.slide-out-right {
+            transform: translateX(20%) scale(0.9);
+            opacity: 0;
+        }
+        
+        .content-slide.slide-in-left {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-slide.slide-in-right {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-20%) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(20%) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .big-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #1f2937;
+            z-index: 10;
+        }
+        
+        .big-arrow:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .big-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+        
+        .big-arrow:disabled:hover {
+            transform: translateY(-50%);
+            background: transparent;
+        }
+        
+        .arrow-left {
+            left: 0;
+        }
+        
+        .arrow-right {
+            right: 0;
+        }
+        
+        .music-cover {
+            width: 600px;
+            height: 600px;
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            object-fit: cover;
+        }
+        
+        .music-info {
+            margin-bottom: 2rem;
+        }
+        
+        .music-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .music-artist {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .spotify-player {
+            width: 600px;
+            height: 120px;
+            border-radius: 12px;
+            border: none;
+            margin: 0 auto;
+        }
+        
+        .spotify-section {
+            padding: 1rem 0;
+            text-align: center;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--accent);
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Dock */
+        .dock {
+            padding: 1rem 0;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .dock-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .dock-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 3rem 1rem 1rem 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-y: visible;
+            margin: 0;
+        }
+        
+        .dock-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .dock-item {
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            transform-origin: bottom center;
+            margin-bottom: 2rem;
+        }
+        
+        .dock-cover {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            transform-origin: bottom center;
+        }
+        
+        .dock-item:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        
+        .dock-item:hover .dock-cover {
+            transform: scale(1.2);
+        }
+        
+        .dock-item.active .dock-cover {
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .dock-title {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 0.5rem;
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 1rem;
+            }
+            
+            .content-wrapper {
+                width: 100%;
+                max-width: 500px;
+                margin: 0;
+            }
+            
+            .music-cover {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .music-title {
+                font-size: 1.8rem;
+            }
+            
+            .music-artist {
+                font-size: 1.1rem;
+            }
+            
+            .spotify-section {
+                padding: 1rem;
+            }
+            
+            .spotify-player {
+                width: 100%;
+                max-width: 500px;
+                height: 100px;
+            }
+            
+            .dock {
+                padding: 1rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 3rem 1rem 1rem 1rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dock-cover {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dock-title {
+                font-size: 0.7rem;
+                max-width: 80px;
+            }
+            
+            .big-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0.5rem;
+                gap: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 400px;
+            }
+            
+            .music-cover {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .music-title {
+                font-size: 1.5rem;
+            }
+            
+            .music-artist {
+                font-size: 1rem;
+            }
+            
+            .spotify-section {
+                padding: 0.5rem;
+            }
+            
+            .spotify-player {
+                max-width: 400px;
+                height: 90px;
+            }
+            
+            .dock {
+                padding: 0.5rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 2.5rem 0.75rem 0.75rem 0.75rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .dock-cover {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .dock-title {
+                font-size: 0.6rem;
+                max-width: 70px;
+            }
+            
+            .big-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0.25rem;
+                gap: 1rem;
+            }
+            
+            .content-wrapper {
+                max-width: 320px;
+            }
+            
+            .music-cover {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .music-title {
+                font-size: 1.2rem;
+            }
+            
+            .music-artist {
+                font-size: 0.9rem;
+            }
+            
+            .spotify-section {
+                padding: 0.25rem;
+            }
+            
+            .spotify-player {
+                max-width: 320px;
+                height: 80px;
+            }
+            
+            .dock {
+                padding: 0.25rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 2rem 0.5rem 0.5rem 0.5rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .dock-cover {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .dock-title {
+                font-size: 0.5rem;
+                max-width: 60px;
+            }
+            
+            .big-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .page-background {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            .content-slide {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            .dock-item:hover {
+                -webkit-transform: scale(1.2) translateZ(0);
+                transform: scale(1.2) translateZ(0);
+            }
+        }
+        
+        /* iPad specific optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .main-content {
+                flex-direction: row;
+                gap: 3rem;
+                padding: 2rem;
+            }
+            
+            .content-wrapper {
+                max-width: 450px;
+            }
+            
+            .music-cover {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .spotify-player {
+                max-width: 450px;
+                height: 110px;
+            }
+            
+            .dock-item {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .dock-cover {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            .main-content {
+                flex-direction: column;
+                gap: 2.5rem;
+                padding: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 500px;
+            }
+            
+            .music-cover {
+                width: 380px;
+                height: 380px;
+            }
+            
+            .spotify-player {
+                max-width: 500px;
+                height: 105px;
+            }
+            
+            .dock-item {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .dock-cover {
+                width: 85px;
+                height: 85px;
+            }
+        }
+        
+        /* iPhone specific optimizations */
+        @media (max-width: 375px) {
+            .main-content {
+                padding: 0.15rem;
+                gap: 0.8rem;
+            }
+            
+            .content-wrapper {
+                max-width: 280px;
+            }
+            
+            .music-cover {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .music-title {
+                font-size: 1.1rem;
+            }
+            
+            .music-artist {
+                font-size: 0.8rem;
+            }
+            
+            .spotify-player {
+                max-width: 280px;
+                height: 75px;
+            }
+            
+            .dock-item {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .dock-cover {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .dock-title {
+                font-size: 0.45rem;
+                max-width: 55px;
+            }
+            
+            .big-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body x-data="{
+    musicData: [],
+    currentMusicIndex: 0,
+    loading: false,
+    
+    async loadMusic() {
+        this.loading = true;
+        try {
+            const response = await fetch('./music.json');
+            this.musicData = await response.json();
+        } catch (error) {
+            console.error('Error loading music:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    
+    nextMusic() {
+        if (this.currentMusicIndex < this.musicData.length - 1) {
+            this.animateSlide('right');
+            setTimeout(() => {
+                this.currentMusicIndex++;
+                this.scrollToActiveDockItem();
+            }, 300);
+        }
+    },
+    
+    prevMusic() {
+        if (this.currentMusicIndex > 0) {
+            this.animateSlide('left');
+            setTimeout(() => {
+                this.currentMusicIndex--;
+                this.scrollToActiveDockItem();
+            }, 300);
+        }
+    },
+    
+    animateSlide(direction) {
+        const contentSlide = document.querySelector('.content-slide');
+        const currentBg = document.querySelector('.page-background.current');
+        const nextBg = document.querySelector('.page-background.next');
+        
+        if (contentSlide && currentBg && nextBg) {
+            // Get next music data
+            const nextIndex = direction === 'right' ? this.currentMusicIndex + 1 : this.currentMusicIndex - 1;
+            const nextMusic = this.musicData[nextIndex];
+            
+            if (nextMusic) {
+                // Preload the next image for smoother transition
+                this.preloadImage(nextMusic.image, () => {
+                    // Update next background image
+                    nextBg.style.backgroundImage = `url('${nextMusic.image}')`;
+                    
+                    // Start cross-fade animation immediately
+                    nextBg.style.opacity = '1';
+                    currentBg.style.opacity = '0';
+                    
+                    // Add slide out class
+                    if (direction === 'right') {
+                        contentSlide.classList.add('slide-out-left');
+                    } else {
+                        contentSlide.classList.add('slide-out-right');
+                    }
+                    
+                    // Remove slide out class and add slide in class after animation
+                    setTimeout(() => {
+                        contentSlide.classList.remove('slide-out-left', 'slide-out-right');
+                        if (direction === 'right') {
+                            contentSlide.classList.add('slide-in-right');
+                        } else {
+                            contentSlide.classList.add('slide-in-left');
+                        }
+                        
+                        // Remove slide in class after animation completes
+                        setTimeout(() => {
+                            contentSlide.classList.remove('slide-in-left', 'slide-in-right');
+                            
+                            // Swap background layers
+                            currentBg.style.backgroundImage = nextBg.style.backgroundImage;
+                            currentBg.style.opacity = '1';
+                            nextBg.style.opacity = '0';
+                        }, 600);
+                    }, 300);
+                });
+            }
+        }
+    },
+    
+    preloadImage(src, callback) {
+        const img = new Image();
+        img.onload = callback;
+        img.onerror = callback; // Continue even if image fails to load
+        img.src = src;
+    },
+    
+    selectMusic(index) {
+        const direction = index > this.currentMusicIndex ? 'right' : 'left';
+        
+        // Preload the target image first
+        const targetMusic = this.musicData[index];
+        if (targetMusic) {
+            this.preloadImage(targetMusic.image, () => {
+                this.animateSlide(direction);
+                setTimeout(() => {
+                    this.currentMusicIndex = index;
+                    this.scrollToActiveDockItem();
+                }, 300);
+            });
+        }
+    },
+    
+    scrollToActiveDockItem() {
+        setTimeout(() => {
+            const activeItem = document.querySelector('.dock-item.active');
+            if (activeItem) {
+                activeItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }, 100);
+    },
+    
+    scrollDock(direction) {
+        const dockScroll = document.querySelector('.dock-scroll');
+        if (dockScroll) {
+            const scrollAmount = 200;
+            if (direction === 'left') {
+                dockScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                dockScroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+    },
+    
+    get currentMusic() {
+        return this.musicData[this.currentMusicIndex] || null;
+    },
+    
+    get currentMusicImage() {
+        return this.currentMusic?.image || '';
+    },
+    
+    get currentMusicName() {
+        return this.currentMusic?.name || '';
+    },
+    
+    get currentMusicArtist() {
+        return this.currentMusic?.artists || '';
+    },
+    
+    get currentMusicId() {
+        return this.currentMusic?.id || '';
+    }
+}" x-init="loadMusic()">
+    <div class="page-background current" :style="`background-image: url('${currentMusicImage}')`"></div>
+    <div class="page-background next" :style="`background-image: url('${currentMusicImage}')`"></div>
+    
+    <div class="main-content">
+        <div class="content-wrapper">
+            <button class="big-arrow arrow-left" @click="prevMusic()" :disabled="currentMusicIndex === 0">
+                ‹
+            </button>
+            
+            <button class="big-arrow arrow-right" @click="nextMusic()" :disabled="currentMusicIndex === musicData.length - 1">
+                ›
+            </button>
+            
+            <template x-if="loading">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading music...</p>
+                </div>
+            </template>
+            
+            <template x-if="!loading && currentMusic">
+                <div class="content-slide">
+                    <img :src="currentMusicImage" :alt="currentMusicName" class="music-cover">
+                    
+                    <div class="music-info">
+                        <h1 class="music-title" x-text="currentMusicName"></h1>
+                        <p class="music-artist" x-text="currentMusicArtist"></p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    
+    <!-- Spotify Player -->
+    <div class="spotify-section">
+        <template x-if="!loading && currentMusic">
+            <iframe 
+                :src="`https://open.spotify.com/embed/album/${currentMusicId}?utm_source=generator`"
+                class="spotify-player"
+                frameborder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+        </template>
+    </div>
+    
+    <!-- Dock -->
+    <div class="dock">
+        <div class="dock-container">
+            <div class="dock-scroll">
+                <template x-for="(music, index) in musicData" :key="music.id">
+                    <div class="dock-item" :class="{ 'active': index === currentMusicIndex }" @click="selectMusic(index)">
+                        <img :src="music.image" :alt="music.name" class="dock-cover">
+                        <div class="dock-title" x-text="music.name"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const alpineComponent = document.querySelector('[x-data]').__x.$data;
+            
+            if (e.key === 'ArrowLeft') {
+                alpineComponent.prevMusic();
+            } else if (e.key === 'ArrowRight') {
+                alpineComponent.nextMusic();
+            }
+        });
+    </script>
+</body>
+</html>
