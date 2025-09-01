@@ -609,7 +609,7 @@ itemsPerPage: 9,
                         <ul class="project-list">
                         <template x-for="album in albums.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="album.id">
                             <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <a :href="`https://open.spotify.com/album/${album.id}`" target="_blank" class="h-full block">
+                                <a :href="`/music/${album.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim()}/`" class="h-full block">
                                     <figure class="project-img h-[200px] w-full">
                                         <div class="project-item-icon-box">
                                             <ion-icon name="eye-outline"></ion-icon>
