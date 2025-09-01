@@ -576,7 +576,7 @@ itemsPerPage: 9,
                 <h2 class="h2 article-title">Music</h2>
             </header>
 
-            <section class="projects"
+            <section class="projects min-h-[600px]"
                      x-init="$watch('page', async (value) => {
                     if (value === 'music') {
                         loading = true;
@@ -593,8 +593,14 @@ itemsPerPage: 9,
                 })"
             >
                 <template x-if="loading">
-                    <div class="flex justify-center w-full">
-                        <x-tiny-spinner />
+                    <div class="flex justify-center w-full min-h-[600px] items-center">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+                    </div>
+                </template>
+
+                <template x-if="!loading && !albums.length">
+                    <div class="flex justify-center w-full min-h-[600px] items-center">
+                        <p class="text-gray-400">No albums found</p>
                     </div>
                 </template>
 
@@ -602,13 +608,13 @@ itemsPerPage: 9,
                     <div>
                         <ul class="project-list">
                         <template x-for="album in albums.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="album.id">
-                            <li class="project-item active" data-filter-item data-category="web development">
-                                <a :href="`https://open.spotify.com/album/${album.id}`" target="_blank">
-                                    <figure class="project-img">
+                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
+                                <a :href="`https://open.spotify.com/album/${album.id}`" target="_blank" class="h-full block">
+                                    <figure class="project-img h-[200px] w-full">
                                         <div class="project-item-icon-box">
                                             <ion-icon name="eye-outline"></ion-icon>
                                         </div>
-                                        <img :src="album.image" :alt="album.name" loading="lazy" />
+                                        <img :src="album.image" :alt="album.name" loading="lazy" class="w-full h-full object-cover" />
                                     </figure>
                                     <h3 class="project-title" x-text="album.name"></h3>
                                     <p class="project-category" x-text="album.artists"></p>
@@ -663,7 +669,7 @@ itemsPerPage: 9,
                 <h2 class="h2 article-title">Projects</h2>
             </header>
 
-            <section class="projects"
+            <section class="projects min-h-[600px]"
                      x-init="$watch('page', async (value) => {
                     if (value === 'projects') {
                         loading = true;
@@ -680,8 +686,14 @@ itemsPerPage: 9,
                 })"
             >
                 <template x-if="loading">
-                    <div class="flex justify-center w-full">
-                        <x-tiny-spinner />
+                    <div class="flex justify-center w-full min-h-[600px] items-center">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+                    </div>
+                </template>
+
+                <template x-if="!loading && !projects.length">
+                    <div class="flex justify-center w-full min-h-[600px] items-center">
+                        <p class="text-gray-400">No projects found</p>
                     </div>
                 </template>
 
@@ -689,13 +701,13 @@ itemsPerPage: 9,
                     <div>
                         <ul class="project-list">
                         <template x-for="project in projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="project.id">
-                            <li class="project-item active" data-filter-item data-category="web development">
-                                <a :href="project.url" target="_blank">
-                                    <figure class="project-img">
+                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
+                                <a :href="project.url" target="_blank" class="h-full block">
+                                    <figure class="project-img h-[200px] w-full">
                                         <div class="project-item-icon-box">
                                             <ion-icon name="eye-outline"></ion-icon>
                                         </div>
-                                        <img :src="project.image" :alt="project.name" loading="lazy" />
+                                        <img :src="project.image" :alt="project.name" loading="lazy" class="w-full h-full object-cover" />
                                     </figure>
                                     <h3 class="project-title" x-text="project.name"></h3>
                                     <p class="project-category">
