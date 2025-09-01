@@ -11,7 +11,7 @@
     "name": "Task Management App",
     "image": "https://images.unsplash.com/photo-1484480974693-6ca2a3290bf8?w=400&h=300&fit=crop",
     "url": "https://taskmanager.example.com",
-    "github_url": "https://github.com/otokapanadze/task-manager"
+    "github_url": null
   },
   {
     "id": 3,

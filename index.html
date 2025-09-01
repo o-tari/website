@@ -713,10 +713,15 @@ itemsPerPage: 9,
                                         <h3 class="project-title" x-text="project.name"></h3>
                                     </a>
                                     <div class="project-category mt-2">
-                                        <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400 text-sm">
-                                            <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
-                                            View on GitHub
-                                        </a>
+                                        <template x-if="project.github_url">
+                                            <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400 text-sm">
+                                                <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
+                                                View on GitHub
+                                            </a>
+                                        </template>
+                                        <template x-if="!project.github_url">
+                                            <div class="text-sm opacity-0">Placeholder</div>
+                                        </template>
                                     </div>
                                 </div>
                             </li>
