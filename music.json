@@ -1,6 +1,5 @@
 [
     {
-        "id": "55JUgXhD18Cji2CtIxSpX4",
         "name": "Vinaxar",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739f505c846c9aabd512372df7",
@@ -9,10 +8,16 @@
                 "name": "Vinaxar",
                 "file": "vinaxar.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/55JUgXhD18Cji2CtIxSpX4",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4KzrL9qMpAf2R6CnKDYZ5T",
         "name": "Ends Of A Thousand Worlds",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2736effda836f58a29acb3cc8a2",
@@ -21,10 +26,16 @@
                 "name": "Ends Of A Thousand Worlds",
                 "file": "ends-of-a-thousand-worlds.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4KzrL9qMpAf2R6CnKDYZ5T",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2bw3lOeWAe6D7KTEgLgJK4",
         "name": "Distant Galaxies",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273ccc74562b9f7ae4aca25610d",
@@ -33,10 +44,16 @@
                 "name": "Distant Galaxies",
                 "file": "distant-galaxies.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2bw3lOeWAe6D7KTEgLgJK4",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2XDCBqvaOuldXhijRM6CfT",
         "name": "Eyes",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273257af64f48bae57d5371d34e",
@@ -45,10 +62,16 @@
                 "name": "Eyes",
                 "file": "eyes.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2XDCBqvaOuldXhijRM6CfT",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2tuWUDxn9vMSnEQ59niE2D",
         "name": "You Exist, I Exist",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273e82a05206686575cf5233280",
@@ -57,10 +80,16 @@
                 "name": "You Exist, I Exist",
                 "file": "you-exist-i-exist.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2tuWUDxn9vMSnEQ59niE2D",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0Kb53kk74mJx4qVlmMhPDt",
         "name": "Cosmos",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27311520ddf8f0001932e37a016",
@@ -69,10 +98,16 @@
                 "name": "Cosmos",
                 "file": "cosmos.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0Kb53kk74mJx4qVlmMhPDt",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6AMQ2PedUgeiKGmlNgYIuE",
         "name": "Personal Space",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273012b4f2d9ddd91e2cc193881",
@@ -81,10 +116,16 @@
                 "name": "Personal Space",
                 "file": "personal-space.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6AMQ2PedUgeiKGmlNgYIuE",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "1VdXi2JbclLYg8ABd9RPMu",
         "name": "Mist",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2738a90dae69b103b76ceae9872",
@@ -93,10 +134,16 @@
                 "name": "Mist",
                 "file": "mist.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/1VdXi2JbclLYg8ABd9RPMu",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "48RmCWpoP8nY0wkiUMtHPy",
         "name": "Gipsy Danger",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273368dc69aeedf947e99c7570d",
@@ -105,10 +152,16 @@
                 "name": "Gipsy Danger",
                 "file": "gipsy-danger.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/48RmCWpoP8nY0wkiUMtHPy",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2Rb2gh5qVZk2QNRqaMOgoU",
         "name": "System",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273a44561364203e8cf4ed9a514",
@@ -117,10 +170,16 @@
                 "name": "System",
                 "file": "system.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2Rb2gh5qVZk2QNRqaMOgoU",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4543YdBdktIydaP8HIsryB",
         "name": "Resistance",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2736cbffc8d2932b8f8d810624e",
@@ -129,10 +188,16 @@
                 "name": "Resistance",
                 "file": "resistance.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4543YdBdktIydaP8HIsryB",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "5cNgB2GPAAduQONK8F5NnU",
         "name": "Silent Battles",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27325d34aa3c88b46cd79cace07",
@@ -141,10 +206,16 @@
                 "name": "Silent Battles",
                 "file": "silent-battles.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/5cNgB2GPAAduQONK8F5NnU",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "22or7Ig8bXxu0w8cFUwlDQ",
         "name": "Jupiter",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739dc1bcba37f82aa2dc834a3d",
@@ -153,10 +224,16 @@
                 "name": "Jupiter",
                 "file": "jupiter.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/22or7Ig8bXxu0w8cFUwlDQ",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0PJQKTlzvpiUCvpSZJBVzn",
         "name": "Voyager",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739d3a7c88e4f1c5b1f47fb1a8",
@@ -165,10 +242,16 @@
                 "name": "Voyager",
                 "file": "voyager.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0PJQKTlzvpiUCvpSZJBVzn",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "22CRNKBOHQwGCPYqXuZOBg",
         "name": "Billions Of Stars Exploding In The Depths Of The Universe",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273aadf5bf802011545e51a88fa",
@@ -177,10 +260,16 @@
                 "name": "Billions Of Stars Exploding In The Depths Of The Universe",
                 "file": "billions-of-stars-exploding.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/22CRNKBOHQwGCPYqXuZOBg",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4j21PVgHVMChf5B67Q5ykm",
         "name": "Harmony",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27367ef0ac42243085d98bc3cac",
@@ -189,10 +278,16 @@
                 "name": "Harmony",
                 "file": "harmony.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4j21PVgHVMChf5B67Q5ykm",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4KURTpoIyBgEVQhWXT7pmW",
         "name": "Cosmic",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2737a522bd6535b3b79e5a7bb5d",
@@ -201,10 +296,16 @@
                 "name": "Cosmic",
                 "file": "cosmic.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4KURTpoIyBgEVQhWXT7pmW",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6TpT5ojVUih7KVnMiomwWq",
         "name": "Calypso",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2730d45bbfa47abadd2592c3d1d",
@@ -213,10 +314,16 @@
                 "name": "Calypso",
                 "file": "calypso.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6TpT5ojVUih7KVnMiomwWq",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "042L1ML3h0bqQNvwO0dUVR",
         "name": "Kal El",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273b9114e79490ba393f3c6b2db",
@@ -225,11 +332,17 @@
                 "name": "Kal El",
                 "file": "kal-el.mp3"
             }
-        ]
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/042L1ML3h0bqQNvwO0dUVR",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6ModgEkKvncXj4i7zqL8dC",
-        "name": "Dot Between Saturn's Rings",
+                "name": "Dot Between Saturn's Rings",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2732f35e36aa569fd40c79b40e6",
         "tracks": [
@@ -237,11 +350,18 @@
                 "name": "Dot Between Saturn's Rings",
                 "file": "dot-between-saturns-rings.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6ModgEkKvncXj4i7zqL8dC",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4IRYiM4fndgDkF0dse3xfw",
-        "name": "Pulsar",
+                "name": "Pulsar",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2732819530e1779bd02c431f2da",
         "tracks": [
@@ -249,11 +369,18 @@
                 "name": "Pulsar",
                 "file": "pulsar.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4IRYiM4fndgDkF0dse3xfw",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6swrb5MRZ54erISzbPtBBH",
-        "name": "Serenity",
+                "name": "Serenity",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739952fa43df6a30beb3aa561d",
         "tracks": [
@@ -261,11 +388,18 @@
                 "name": "Serenity",
                 "file": "serenity.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6swrb5MRZ54erISzbPtBBH",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "1c3TFrIqeritS6Zd7CWm2X",
-        "name": "Higher State",
+                "name": "Higher State",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273c40354a510704db220d94be5",
         "tracks": [
@@ -273,11 +407,18 @@
                 "name": "Higher State",
                 "file": "higher-state.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/1c3TFrIqeritS6Zd7CWm2X",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "10qpIGDJZiGYLiu4Zjlihz",
-        "name": "Ursa Minor",
+                "name": "Ursa Minor",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2733b133f2e39ff97e54f99276d",
         "tracks": [
@@ -285,11 +426,18 @@
                 "name": "Ursa Minor",
                 "file": "ursa-minor.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/10qpIGDJZiGYLiu4Zjlihz",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2wBJJIpf6fW1pVnidUK1Ku",
-        "name": "Children Of The Stars",
+                "name": "Children Of The Stars",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273cc42579850c876cfe6524b7d",
         "tracks": [
@@ -297,11 +445,18 @@
                 "name": "Children Of The Stars",
                 "file": "children-of-the-stars.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2wBJJIpf6fW1pVnidUK1Ku",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2rmduZlK6nyVp3ItjrgJpH",
-        "name": "Trapped In Three Dimensions",
+                "name": "Trapped In Three Dimensions",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273448e7bc32588ca3d5855fdff",
         "tracks": [
@@ -309,11 +464,18 @@
                 "name": "Trapped In Three Dimensions",
                 "file": "trapped-in-three-dimensions.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2rmduZlK6nyVp3ItjrgJpH",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "561woJwRaOj4lSNF0gqxm7",
-        "name": "Red",
+                "name": "Red",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739ae436777b098e87465ff654",
         "tracks": [
@@ -321,11 +483,18 @@
                 "name": "Red",
                 "file": "red.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/561woJwRaOj4lSNF0gqxm7",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0nFJmmSuHuad149MMtnqbj",
-        "name": "Luna",
+                "name": "Luna",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2735044e385bcdd664f5e335752",
         "tracks": [
@@ -333,11 +502,18 @@
                 "name": "Luna",
                 "file": "luna.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0nFJmmSuHuad149MMtnqbj",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2C30uLrO45DXcwzf1RJaDI",
-        "name": "Let There Be Trance",
+                "name": "Let There Be Trance",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27312625167aaf5b35123000734",
         "tracks": [
@@ -345,11 +521,18 @@
                 "name": "Let There Be Trance",
                 "file": "let-there-be-trance.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2C30uLrO45DXcwzf1RJaDI",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0O2hsFtEPX6DHlSvy2eAsX",
-        "name": "Remember Us Better Than We Are",
+                "name": "Remember Us Better Than We Are",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739fcf63905af550d0e0bb59da",
         "tracks": [
@@ -357,11 +540,18 @@
                 "name": "Remember Us Better Than We Are",
                 "file": "remember-us-better-than-we-are.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0O2hsFtEPX6DHlSvy2eAsX",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6Ui2LQCrsKmbyk0VIjZrDR",
-        "name": "Shavlego",
+                "name": "Shavlego",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273a114b353717f8c71f926d14d",
         "tracks": [
@@ -369,11 +559,18 @@
                 "name": "Shavlego",
                 "file": "shavlego.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6Ui2LQCrsKmbyk0VIjZrDR",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "50K8lSjsZropDQUgAyBiJm",
-        "name": "Earthrise on the Moon",
+                "name": "Earthrise on the Moon",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273f4aed5400bf81c48feb028f1",
         "tracks": [
@@ -381,11 +578,18 @@
                 "name": "Earthrise on the Moon",
                 "file": "earthrise-on-the-moon.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/50K8lSjsZropDQUgAyBiJm",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7HZV6y5MBYkGsobwZek7gV",
-        "name": "Interstellar",
+                "name": "Interstellar",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273f348ce91a79040e681a54983",
         "tracks": [
@@ -393,11 +597,18 @@
                 "name": "Interstellar",
                 "file": "interstellar.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7HZV6y5MBYkGsobwZek7gV",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "19KU7LeVlVE1uit0xI9IBa",
-        "name": "Light",
+                "name": "Light",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273bd79d9b8c199f02eac6c1056",
         "tracks": [
@@ -405,11 +616,18 @@
                 "name": "Light",
                 "file": "light.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/19KU7LeVlVE1uit0xI9IBa",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7mU7ZW1JbPVeFI75VXQ5Fq",
-        "name": "Straight To The Stars",
+                "name": "Straight To The Stars",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27390268e4da03b5eee7d1a00ac",
         "tracks": [
@@ -417,11 +635,18 @@
                 "name": "Straight To The Stars",
                 "file": "straight-to-the-stars.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7mU7ZW1JbPVeFI75VXQ5Fq",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7llJHSXhzNBzI074NrI1yT",
-        "name": "Reaching Europa",
+                "name": "Reaching Europa",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273c743c571ff3aed62bd70a836",
         "tracks": [
@@ -429,11 +654,18 @@
                 "name": "Reaching Europa",
                 "file": "reaching-europa.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7llJHSXhzNBzI074NrI1yT",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0UFgG4NRKPtVdmuOczpurc",
-        "name": "Strangers",
+                "name": "Strangers",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273bb7aceaa998a92970841fdac",
         "tracks": [
@@ -441,11 +673,18 @@
                 "name": "Strangers",
                 "file": "strangers.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0UFgG4NRKPtVdmuOczpurc",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "3KKku0bHOdC4qEQv2dSByC",
-        "name": "Eternal Night",
+                "name": "Eternal Night",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b27300e95cd1e48daa4bf4b5f9a1",
         "tracks": [
@@ -453,11 +692,18 @@
                 "name": "Eternal Night",
                 "file": "eternal-night.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/3KKku0bHOdC4qEQv2dSByC",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2MVSyftnHlod4IFOIcgA2q",
-        "name": "Normandy",
+                "name": "Normandy",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2735dddb3bdb6d7adac3f16d9cf",
         "tracks": [
@@ -465,11 +711,18 @@
                 "name": "Normandy",
                 "file": "normandy.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2MVSyftnHlod4IFOIcgA2q",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "0fdW6vbk3Y0KGe7ca4FacH",
-        "name": "To Infinity & Beyond",
+                "name": "To Infinity & Beyond",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273b1e2f110b6dc362fdbb20272",
         "tracks": [
@@ -477,11 +730,18 @@
                 "name": "To Infinity & Beyond",
                 "file": "to-infinity-and-beyond.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/0fdW6vbk3Y0KGe7ca4FacH",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "4Ciq9eBBKoAX2gvvFgCSBk",
-        "name": "Why Do We Fall",
+                "name": "Why Do We Fall",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273b9436b67b322aa4a7060dafa",
         "tracks": [
@@ -489,11 +749,18 @@
                 "name": "Why Do We Fall",
                 "file": "why-do-we-fall.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/4Ciq9eBBKoAX2gvvFgCSBk",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "5YPqd3qqjbTNyNEo6ebICw",
-        "name": "Breath",
+                "name": "Breath",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2735814e1eb0e10259a327fbefa",
         "tracks": [
@@ -501,11 +768,18 @@
                 "name": "Breath",
                 "file": "breath.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/5YPqd3qqjbTNyNEo6ebICw",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "5HfquLifOUupYmD2KWhTUg",
-        "name": "Pillars of Creation",
+                "name": "Pillars of Creation",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273f14a028cbfa3c887c48aae15",
         "tracks": [
@@ -513,11 +787,18 @@
                 "name": "Pillars of Creation",
                 "file": "pillars-of-creation.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/5HfquLifOUupYmD2KWhTUg",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "06PnOMq5vCEqB8PFASrTJG",
-        "name": "Outer Space",
+                "name": "Outer Space",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273d818b5acc55a226c6c7e6837",
         "tracks": [
@@ -525,11 +806,18 @@
                 "name": "Outer Space",
                 "file": "outer-space.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/06PnOMq5vCEqB8PFASrTJG",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "6jL3ztxCKIRZFkUGrzdQ21",
-        "name": "Inspiration",
+                "name": "Inspiration",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b2739e92c0e66ed6808c224a235b",
         "tracks": [
@@ -537,11 +825,18 @@
                 "name": "Inspiration",
                 "file": "inspiration.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/6jL3ztxCKIRZFkUGrzdQ21",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "3RueSgkLbiTzc9sUOadBhg",
-        "name": "Black Sea",
+                "name": "Black Sea",
         "artists": "Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273831517d88db8b268153a9c2d",
         "tracks": [
@@ -549,11 +844,18 @@
                 "name": "Black Sea",
                 "file": "black-sea.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/3RueSgkLbiTzc9sUOadBhg",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "1aY0m6a8vIEUMmtrt6cjnn",
-        "name": "In Tears, There Is Something Of Pleasure",
+                "name": "In Tears, There Is Something Of Pleasure",
         "artists": "Roccoo, Oto Kapanadze",
         "image": "https://i.scdn.co/image/ab67616d0000b273d539f8b863c3ba3881f4a9e9",
         "tracks": [
@@ -561,11 +863,18 @@
                 "name": "In Tears, There Is Something Of Pleasure",
                 "file": "in-tears-there-is-something-of-pleasure.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/1aY0m6a8vIEUMmtrt6cjnn",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7Movb3w1gk5KcJWAJSxElu",
-        "name": "Audio Pleasure Vol.3",
+                "name": "Audio Pleasure Vol.3",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b273bcf903e77311661cdc86a873",
         "tracks": [
@@ -573,11 +882,18 @@
                 "name": "Audio Pleasure Vol.3",
                 "file": "audio-pleasure-vol3.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7Movb3w1gk5KcJWAJSxElu",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7nbWCqdcOPLrvQAFJKXsZg",
-        "name": "Trance Essentials 2013 Vol.8",
+                "name": "Trance Essentials 2013 Vol.8",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b27337300e75ae41e73c0574e705",
         "tracks": [
@@ -585,11 +901,18 @@
                 "name": "Trance Essentials 2013 Vol.8",
                 "file": "trance-essentials-2013-vol8.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7nbWCqdcOPLrvQAFJKXsZg",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7GBexVI2fijQL0JG5RJKhr",
-        "name": "World Chill-Lounge 2015-1 - The Best of World Chill Lounge Charts",
+                "name": "World Chill-Lounge 2015-1 - The Best of World Chill Lounge Charts",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b2735721e1953ef6d5e8c41a4989",
         "tracks": [
@@ -597,11 +920,18 @@
                 "name": "World Chill-Lounge 2015-1",
                 "file": "world-chill-lounge-2015-1.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7GBexVI2fijQL0JG5RJKhr",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "2dRq8X8h3gLzmySm4sGvET",
-        "name": "Audio Pleasure Vol.3 (Radio Edits)",
+                "name": "Audio Pleasure Vol.3 (Radio Edits)",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b2735ad0cfce62f886bfc1b9e000",
         "tracks": [
@@ -609,11 +939,18 @@
                 "name": "Audio Pleasure Vol.3 (Radio Edits)",
                 "file": "audio-pleasure-vol3-radio-edits.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/2dRq8X8h3gLzmySm4sGvET",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "3YRNVIzWBImtXFCdo3sUg0",
-        "name": "Trance Essentials 2013 Vol.7",
+                "name": "Trance Essentials 2013 Vol.7",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b27391692ac68394ba4d622a4ffa",
         "tracks": [
@@ -621,11 +958,18 @@
                 "name": "Trance Essentials 2013 Vol.7",
                 "file": "trance-essentials-2013-vol7.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/3YRNVIzWBImtXFCdo3sUg0",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "3UIXPKokZaEZ3tsUwMFk89",
-        "name": "Sensual Lounge Musique Vol.1 (Selected by Simon Le Grec)",
+                "name": "Sensual Lounge Musique Vol.1 (Selected by Simon Le Grec)",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b2733eec131a3eb1c38ab8a18436",
         "tracks": [
@@ -633,11 +977,18 @@
                 "name": "Sensual Lounge Musique Vol.1",
                 "file": "sensual-lounge-musique-vol1.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/3UIXPKokZaEZ3tsUwMFk89",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "060Y7gmEfQgfI7Irksifcv",
-        "name": "The Purr, Vol. 2",
+                "name": "The Purr, Vol. 2",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b2739badb76a26d9c6c5c613dc3c",
         "tracks": [
@@ -645,11 +996,18 @@
                 "name": "The Purr, Vol. 2",
                 "file": "the-purr-vol2.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/060Y7gmEfQgfI7Irksifcv",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "7dIzryQUPQxcL7HJnzQgD0",
-        "name": "Chillout Brilliants",
+                "name": "Chillout Brilliants",
         "artists": "Various Artists",
         "image": "https://i.scdn.co/image/ab67616d0000b2734fac55dda0987356772e8d44",
         "tracks": [
@@ -657,11 +1015,18 @@
                 "name": "Chillout Brilliants",
                 "file": "chillout-brilliants.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/7dIzryQUPQxcL7HJnzQgD0",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     },
     {
-        "id": "1JsaPqoLi84AghLeWLIzAe",
-        "name": "No Lights",
+                "name": "No Lights",
         "artists": "Simmon G, Electronic Pillz",
         "image": "https://i.scdn.co/image/ab67616d0000b273bfaf99578138abc5ae4706c9",
         "tracks": [
@@ -669,6 +1034,14 @@
                 "name": "No Lights",
                 "file": "no-lights.mp3"
             }
-        ]
+        
+        ],
+        "links": {
+            "spotify": "https://open.spotify.com/track/1JsaPqoLi84AghLeWLIzAe",
+            "apple_music": null,
+            "youtube": null,
+            "youtube_music": null,
+            "tidal": null
+        }
     }
 ]

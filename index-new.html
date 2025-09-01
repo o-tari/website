@@ -1378,7 +1378,7 @@
     <div class="dock">
         <div class="dock-container">
             <div class="dock-scroll">
-                <template x-for="(music, index) in musicData" :key="music.id">
+                <template x-for="(music, index) in musicData" :key="index">
                     <div class="dock-item" :class="{ 'active': index === currentMusicIndex }" @click="selectMusic(index)">
                         <img :src="music.image" :alt="music.name" class="dock-cover">
                         <div class="dock-title" x-text="music.name"></div>
