@@ -4,766 +4,1401 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Oto Kapanadze</title>
+    <title>Oto Kapanadze - Music</title>
+    <meta name="description" content="Listen to music by Oto Kapanadze - Full Stack Developer and Music Producer">
+    <meta name="keywords" content="Oto Kapanadze, Music, Electronic, Trance, Ambient, Spotify">
+    <meta property="og:title" content="Oto Kapanadze - Music">
+    <meta property="og:description" content="Listen to music by Oto Kapanadze">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/imcool.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oto Kapanadze - Music">
+    <meta name="twitter:description" content="Listen to music by Oto Kapanadze">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="tailwind.css">
-    <link rel="stylesheet" href="app.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8fafc;
+            --accent: #f59e0b;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --border: #e5e7eb;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Figtree', sans-serif;
+            background: #000000;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: visible;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            overflow: visible;
+        }
+        
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(20px);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+        
+        .page-background.current {
+            opacity: 1;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-background.next {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-wrapper {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .content-slide {
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), scale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(0) scale(1);
+            opacity: 1;
+        }
+        
+        .content-slide.slide-out-left {
+            transform: translateX(-20%) scale(0.9);
+            opacity: 0;
+        }
+        
+        .content-slide.slide-out-right {
+            transform: translateX(20%) scale(0.9);
+            opacity: 0;
+        }
+        
+        .content-slide.slide-in-left {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-slide.slide-in-right {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-20%) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(20%) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .big-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #1f2937;
+            z-index: 10;
+        }
+        
+        .big-arrow:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .big-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+        
+        .big-arrow:disabled:hover {
+            transform: translateY(-50%);
+            background: transparent;
+        }
+        
+        .arrow-left {
+            left: 0;
+        }
+        
+        .arrow-right {
+            right: 0;
+        }
+        
+        .music-cover {
+            width: 600px;
+            height: 600px;
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            object-fit: cover;
+        }
+        
+        .music-info {
+            margin-bottom: 2rem;
+        }
+        
+        .music-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .music-artist {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .spotify-player {
+            width: 600px;
+            height: 120px;
+            border-radius: 12px;
+            border: none;
+            margin: 0 auto;
+        }
+        
+        .spotify-section {
+            padding: 1rem 0;
+            text-align: center;
+        }
+        
+        .audio-player {
+            width: 600px;
+            height: 80px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .waveform-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+            gap: 2px;
+            z-index: 1;
+            padding: 0.5rem;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .player-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .play-pause-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #9ca3af;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-pause-btn:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 0.25rem;
+        }
+        
+        .waveform-container {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 20px;
+            margin: 0 1rem;
+        }
+        
+        /* Style 1: Classic Bars */
+        .waveform-bar.classic {
+            width: 3px;
+            background: rgba(59, 130, 246, 0.4);
+            border-radius: 2px;
+            animation: waveform-classic 1.5s ease-in-out infinite;
+            min-height: 6px;
+            max-height: 30px;
+        }
+        
+        @keyframes waveform-classic {
+            0%, 100% {
+                height: 6px;
+                opacity: 0.3;
+            }
+            50% {
+                height: 30px;
+                opacity: 0.8;
+            }
+        }
+        
+        /* Style 2: Dots */
+        .waveform-dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(16, 185, 129, 0.5);
+            border-radius: 50%;
+            animation: waveform-dot 1.2s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-dot {
+            0%, 100% {
+                transform: scale(0.4);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.8);
+                opacity: 0.9;
+            }
+        }
+        
+        /* Style 3: Pulse */
+        .waveform-pulse {
+            width: 5px;
+            height: 5px;
+            background: rgba(245, 158, 11, 0.5);
+            border-radius: 50%;
+            animation: waveform-pulse 1s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-pulse {
+            0%, 100% {
+                transform: scale(0.3);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(2.5);
+                opacity: 0.8;
+            }
+        }
+        
+        /* Style 4: Equalizer */
+        .waveform-eq {
+            width: 2px;
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 1px;
+            animation: waveform-eq 1.8s ease-in-out infinite;
+            min-height: 3px;
+            max-height: 25px;
+        }
+        
+        @keyframes waveform-eq {
+            0%, 100% {
+                height: 3px;
+                opacity: 0.3;
+            }
+            25% {
+                height: 12px;
+                opacity: 0.6;
+            }
+            50% {
+                height: 25px;
+                opacity: 0.9;
+            }
+            75% {
+                height: 15px;
+                opacity: 0.7;
+            }
+        }
+        
+        /* Style 5: Rings */
+        .waveform-ring {
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(236, 72, 153, 0.6);
+            border-radius: 50%;
+            animation: waveform-ring 2s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-ring {
+            0%, 100% {
+                transform: scale(0.5);
+                opacity: 0.2;
+                border-width: 1px;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.8;
+                border-width: 3px;
+            }
+        }
+        
+        /* Style 6: Stars */
+        .waveform-star {
+            width: 6px;
+            height: 6px;
+            background: rgba(168, 85, 247, 0.6);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: waveform-star 1.5s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes waveform-star {
+            0%, 100% {
+                transform: scale(0.3) rotate(0deg);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0.9;
+            }
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: #374151;
+            border-radius: 2px;
+            cursor: pointer;
+            appearance: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #6b7280;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #6b7280;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--accent);
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Dock */
+        .dock {
+            padding: 1rem 0;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .dock-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .dock-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 3rem 1rem 1rem 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-y: visible;
+            margin: 0;
+        }
+        
+        .dock-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .dock-item {
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            transform-origin: bottom center;
+            margin-bottom: 2rem;
+        }
+        
+        .dock-cover {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            transform-origin: bottom center;
+        }
+        
+        .dock-item:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        
+        .dock-item:hover .dock-cover {
+            transform: scale(1.2);
+        }
+        
+        .dock-item.active .dock-cover {
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .dock-title {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 0.5rem;
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 1rem;
+            }
+            
+            .content-wrapper {
+                width: 100%;
+                max-width: 500px;
+                margin: 0;
+            }
+            
+            .music-cover {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .music-title {
+                font-size: 1.8rem;
+            }
+            
+            .music-artist {
+                font-size: 1.1rem;
+            }
+            
+            .spotify-section {
+                padding: 1rem;
+            }
+            
+            .spotify-player {
+                width: 100%;
+                max-width: 500px;
+                height: 100px;
+            }
+            
+            .audio-player {
+                width: 100%;
+                max-width: 500px;
+                height: 100px;
+            }
+            
+            .dock {
+                padding: 1rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 3rem 1rem 1rem 1rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dock-cover {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dock-title {
+                font-size: 0.7rem;
+                max-width: 80px;
+            }
+            
+            .big-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0.5rem;
+                gap: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 400px;
+            }
+            
+            .music-cover {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .music-title {
+                font-size: 1.5rem;
+            }
+            
+            .music-artist {
+                font-size: 1rem;
+            }
+            
+            .spotify-section {
+                padding: 0.5rem;
+            }
+            
+            .spotify-player {
+                max-width: 400px;
+                height: 90px;
+            }
+            
+            .audio-player {
+                max-width: 400px;
+                height: 90px;
+            }
+            
+            .dock {
+                padding: 0.5rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 2.5rem 0.75rem 0.75rem 0.75rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .dock-cover {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .dock-title {
+                font-size: 0.6rem;
+                max-width: 70px;
+            }
+            
+            .big-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0.25rem;
+                gap: 1rem;
+            }
+            
+            .content-wrapper {
+                max-width: 320px;
+            }
+            
+            .music-cover {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .music-title {
+                font-size: 1.2rem;
+            }
+            
+            .music-artist {
+                font-size: 0.9rem;
+            }
+            
+            .spotify-section {
+                padding: 0.25rem;
+            }
+            
+            .spotify-player {
+                max-width: 320px;
+                height: 80px;
+            }
+            
+            .audio-player {
+                max-width: 320px;
+                height: 80px;
+            }
+            
+            .dock {
+                padding: 0.25rem 0;
+            }
+            
+            .dock-scroll {
+                padding: 2rem 0.5rem 0.5rem 0.5rem;
+                margin: 0;
+            }
+            
+            .dock-item {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .dock-cover {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .dock-title {
+                font-size: 0.5rem;
+                max-width: 60px;
+            }
+            
+            .big-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .page-background {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            .content-slide {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            .dock-item:hover {
+                -webkit-transform: scale(1.2) translateZ(0);
+                transform: scale(1.2) translateZ(0);
+            }
+        }
+        
+        /* iPad specific optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .main-content {
+                flex-direction: row;
+                gap: 3rem;
+                padding: 2rem;
+            }
+            
+            .content-wrapper {
+                max-width: 450px;
+            }
+            
+            .music-cover {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .spotify-player {
+                max-width: 450px;
+                height: 110px;
+            }
+            
+            .dock-item {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .dock-cover {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            .main-content {
+                flex-direction: column;
+                gap: 2.5rem;
+                padding: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 500px;
+            }
+            
+            .music-cover {
+                width: 380px;
+                height: 380px;
+            }
+            
+            .spotify-player {
+                max-width: 500px;
+                height: 105px;
+            }
+            
+            .dock-item {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .dock-cover {
+                width: 85px;
+                height: 85px;
+            }
+        }
+        
+        /* iPhone specific optimizations */
+        @media (max-width: 375px) {
+            .main-content {
+                padding: 0.15rem;
+                gap: 0.8rem;
+            }
+            
+            .content-wrapper {
+                max-width: 280px;
+            }
+            
+            .music-cover {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .music-title {
+                font-size: 1.1rem;
+            }
+            
+            .music-artist {
+                font-size: 0.8rem;
+            }
+            
+            .spotify-player {
+                max-width: 280px;
+                height: 75px;
+            }
+            
+            .dock-item {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .dock-cover {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .dock-title {
+                font-size: 0.45rem;
+                max-width: 55px;
+            }
+            
+            .big-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 </head>
-<body>
-<main x-data="{
-page: 'about',
-albums: [],
-projects: [],
-currentPage: 1,
-itemsPerPage: 9,
-            loading: false,
-}">
-    <aside class="sidebar" data-sidebar>
 
-        <div class="sidebar-info">
-
-            <figure class="avatar-box">
-                <img src="assets/imcool.png" class="rounded-3xl" alt="Oto Kapanadze" width="80">
-            </figure>
-
-            <div class="info-content">
-                <h1 class="name" title="Richard hanrick">Oto Kapanadze</h1>
-            </div>
-
-            <button @click="toggle()" class="info_more-btn" data-sidebar-btn>
-                <span>Show Contacts</span>
-
-                <ion-icon name="chevron-down"></ion-icon>
-            </button>
-
-        </div>
-
-        <div class="sidebar-info_more">
-
-            <div class="separator"></div>
-
-            <ul class="contacts-list">
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="mail-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Email</p>
-
-                        <a href="mailto:info@otokapanadze.com" class="contact-link">info@otokapanadze.com</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <svg class="fill-current text-yellow-500" width="40" viewBox="0 0 512 153"
-                             xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-                            <path d="M140.107 96.628c-8.321 0-16.118-3.523-23.202-9.258l1.725-8.096.075-.3c1.536-8.62 6.409-23.089 21.402-23.089 11.244 0 20.39 9.146 20.39 20.39-.038 11.207-9.183 20.353-20.39 20.353zm0-61.395c-19.154 0-33.996 12.444-40.03 32.909-9.221-13.831-16.193-30.435-20.278-44.416H59.184v53.636c0 10.57-8.621 19.19-19.191 19.19-10.57 0-19.19-8.62-19.19-19.19V23.726H.186v53.636c-.075 21.965 17.804 39.993 39.768 39.993 21.965 0 39.844-18.028 39.844-39.993v-8.995c4.01 8.358 8.92 16.791 14.88 24.288l-12.632 59.37h21.103l9.145-43.066c8.021 5.135 17.242 8.359 27.812 8.359 22.601 0 41.005-18.516 41.005-41.118 0-22.564-18.404-40.967-41.005-40.967z"
-                                  fill="#6FDA44"/>
-                            <path d="M244.043 37.557l13.306 53.636 14.656-53.636h17.466l-22.526 77.512h-17.467l-13.83-53.974-13.794 53.936h-17.466L181.86 37.52h17.467l14.655 53.636 13.306-53.636h16.754v.038zm87.22-2.324c-22.676 0-41.042 18.403-41.042 41.042 0 22.677 18.403 41.043 41.042 41.043 22.677 0 41.08-18.366 41.08-41.043 0-22.676-18.403-41.042-41.08-41.042zm0 65.218c-13.343 0-24.138-10.795-24.138-24.138 0-13.344 10.832-24.138 24.138-24.138 13.344 0 24.138 10.794 24.138 24.138 0 13.306-10.794 24.138-24.138 24.138zm90.968-45.54c-11.731 0-21.214 9.52-21.214 21.214v38.906h-17.58V37.557h17.58v11.919s7.496-11.957 22.901-11.957h5.397v17.392h-7.084zm58.997 18.366c12.48-7.047 20.952-20.428 20.952-35.758H484.6c0 12.931-10.494 23.426-23.425 23.426h-2.362V.15h-17.578V115.03h17.578V78.524h2.1c1.724 0 3.973 1.125 4.985 2.511l24.962 33.996h21.065l-30.697-41.754z"/>
-                        </svg>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Upwork</p>
-
-                        <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" class="contact-link"
-                           target="_blank">Oto Kapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="logo-github"/>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Github</p>
-
-                        <a href="https://github.com/otokapanadze" class="contact-link" target="_blank">otokapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="location-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Location</p>
-
-                        <address>Tbilisi, Georgia</address>
-                    </div>
-
-                </li>
-
-            </ul>
-
-            <div class="separator"></div>
-
-            <ul class="social-list">
-                <li class="social-item">
-                    <a href="https://www.instagram.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://www.facebook.com/otokapanadzeofficial/" target="_blank" class="social-link">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://twitter.com/Oto_Kapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://soundcloud.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-soundcloud"></ion-icon>
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </aside>
-
+<body x-data="{
+    musicData: [],
+    currentMusicIndex: 0,
+    loading: false,
+    audioPlayer: null,
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 1,
+    
+    async loadMusic() {
+        this.loading = true;
+        try {
+            const response = await fetch('./music.json');
+            this.musicData = await response.json();
+            this.initAudioPlayer();
+            // Load the first track after initialization
+            setTimeout(() => {
+                if (this.currentMusic && this.currentMusic.tracks) {
+                    this.loadTrack();
+                }
+            }, 200);
+        } catch (error) {
+            console.error('Error loading music:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    
+    initAudioPlayer() {
+        this.audioPlayer = new Audio();
+        this.audioPlayer.addEventListener('timeupdate', () => {
+            this.currentTime = this.audioPlayer.currentTime;
+        });
+        this.audioPlayer.addEventListener('loadedmetadata', () => {
+            this.duration = this.audioPlayer.duration;
+            console.log('Audio loaded:', this.audioPlayer.src, 'Duration:', this.duration);
+        });
+        this.audioPlayer.addEventListener('ended', () => {
+            this.isPlaying = false;
+            this.nextMusic();
+        });
+        this.audioPlayer.addEventListener('play', () => {
+            this.isPlaying = true;
+            console.log('Audio started playing');
+        });
+        this.audioPlayer.addEventListener('pause', () => {
+            this.isPlaying = false;
+            console.log('Audio paused');
+        });
+        this.audioPlayer.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+        this.audioPlayer.addEventListener('loadstart', () => {
+            console.log('Audio loading started');
+        });
+        this.audioPlayer.addEventListener('canplay', () => {
+            console.log('Audio can play');
+        });
+    },
+    
+    loadTrack() {
+        if (this.audioPlayer && this.currentMusic && this.currentMusic.tracks && this.currentMusic.tracks.length > 0) {
+            const track = this.currentMusic.tracks[0];
+            const audioSrc = `./tracks/${track.file}`;
+            console.log('Loading track:', audioSrc);
+            this.audioPlayer.src = audioSrc;
+            this.audioPlayer.load();
+        } else {
+            console.log('Audio player not ready or no track data available:', {
+                audioPlayer: !!this.audioPlayer,
+                currentMusic: this.currentMusic,
+                tracks: this.currentMusic?.tracks
+            });
+        }
+    },
+    
+    togglePlayPause() {
+        if (this.audioPlayer && this.currentMusic && this.currentMusic.tracks && this.currentMusic.tracks.length > 0) {
+            if (this.isPlaying) {
+                this.audioPlayer.pause();
+            } else {
+                this.audioPlayer.play().catch(error => {
+                    console.error('Error playing audio:', error);
+                });
+            }
+        } else {
+            console.log('Cannot play: audio player or track not ready');
+        }
+    },
+    
+    seekTo(event) {
+        if (this.audioPlayer && this.duration) {
+            const rect = event.target.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percentage = clickX / rect.width;
+            this.audioPlayer.currentTime = percentage * this.duration;
+        }
+    },
+    
+    setVolume(event) {
+        if (this.audioPlayer) {
+            this.volume = event.target.value;
+            this.audioPlayer.volume = this.volume;
+        }
+    },
+    
+    formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    },
+    
+    nextMusic() {
+        if (this.currentMusicIndex < this.musicData.length - 1) {
+            this.animateSlide('right');
+            setTimeout(() => {
+                this.currentMusicIndex++;
+                this.scrollToActiveDockItem();
+                this.loadTrack();
+            }, 300);
+        }
+    },
+    
+    prevMusic() {
+        if (this.currentMusicIndex > 0) {
+            this.animateSlide('left');
+            setTimeout(() => {
+                this.currentMusicIndex--;
+                this.scrollToActiveDockItem();
+                this.loadTrack();
+            }, 300);
+        }
+    },
+    
+    animateSlide(direction) {
+        const contentSlide = document.querySelector('.content-slide');
+        const currentBg = document.querySelector('.page-background.current');
+        const nextBg = document.querySelector('.page-background.next');
+        
+        if (contentSlide && currentBg && nextBg) {
+            // Get next music data
+            const nextIndex = direction === 'right' ? this.currentMusicIndex + 1 : this.currentMusicIndex - 1;
+            const nextMusic = this.musicData[nextIndex];
+            
+            if (nextMusic) {
+                // Preload the next image for smoother transition
+                this.preloadImage(nextMusic.image, () => {
+                    // Update next background image
+                    nextBg.style.backgroundImage = `url('${nextMusic.image}')`;
+                    
+                    // Start cross-fade animation immediately
+                    nextBg.style.opacity = '1';
+                    currentBg.style.opacity = '0';
+                    
+                    // Add slide out class
+                    if (direction === 'right') {
+                        contentSlide.classList.add('slide-out-left');
+                    } else {
+                        contentSlide.classList.add('slide-out-right');
+                    }
+                    
+                    // Remove slide out class and add slide in class after animation
+                    setTimeout(() => {
+                        contentSlide.classList.remove('slide-out-left', 'slide-out-right');
+                        if (direction === 'right') {
+                            contentSlide.classList.add('slide-in-right');
+                        } else {
+                            contentSlide.classList.add('slide-in-left');
+                        }
+                        
+                        // Remove slide in class after animation completes
+                        setTimeout(() => {
+                            contentSlide.classList.remove('slide-in-left', 'slide-in-right');
+                            
+                            // Swap background layers
+                            currentBg.style.backgroundImage = nextBg.style.backgroundImage;
+                            currentBg.style.opacity = '1';
+                            nextBg.style.opacity = '0';
+                        }, 600);
+                    }, 300);
+                });
+            }
+        }
+    },
+    
+    preloadImage(src, callback) {
+        const img = new Image();
+        img.onload = callback;
+        img.onerror = callback; // Continue even if image fails to load
+        img.src = src;
+    },
+    
+    selectMusic(index) {
+        const direction = index > this.currentMusicIndex ? 'right' : 'left';
+        
+        // Preload the target image first
+        const targetMusic = this.musicData[index];
+        if (targetMusic) {
+            this.preloadImage(targetMusic.image, () => {
+                this.animateSlide(direction);
+                setTimeout(() => {
+                    this.currentMusicIndex = index;
+                    this.scrollToActiveDockItem();
+                    this.loadTrack();
+                }, 300);
+            });
+        }
+    },
+    
+    scrollToActiveDockItem() {
+        setTimeout(() => {
+            const activeItem = document.querySelector('.dock-item.active');
+            if (activeItem) {
+                activeItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }, 100);
+    },
+    
+    scrollDock(direction) {
+        const dockScroll = document.querySelector('.dock-scroll');
+        if (dockScroll) {
+            const scrollAmount = 200;
+            if (direction === 'left') {
+                dockScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                dockScroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+    },
+    
+    get currentMusic() {
+        return this.musicData[this.currentMusicIndex] || null;
+    },
+    
+    get currentMusicImage() {
+        return this.currentMusic?.image || '';
+    },
+    
+    get currentMusicName() {
+        return this.currentMusic?.name || '';
+    },
+    
+    get currentMusicArtist() {
+        return this.currentMusic?.artists || '';
+    },
+    
+    get currentMusicId() {
+        return this.currentMusic?.tracks?.[0]?.file || '';
+    }
+}" x-init="loadMusic()">
+    <div class="page-background current" :style="`background-image: url('${currentMusicImage}')`"></div>
+    <div class="page-background next" :style="`background-image: url('${currentMusicImage}')`"></div>
+    
     <div class="main-content">
-        <nav class="navbar">
-
-            <ul class="navbar-list">
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'about'" :class="page === 'about' ? 'active' : ''">About</button>
-                </li>
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'music'" :class="page === 'music' ? 'active' : ''">Music</button>
-                </li>
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'projects'" :class="page === 'projects' ? 'active' : ''">Projects</button>
-                </li>
-            </ul>
-
-        </nav>
-
-
-        <article class="about" data-page="about" :class="page === 'about' ? 'active' : ''">
-
-            <header>
-                <h2 class="h2 article-title">About me</h2>
-            </header>
-
-            <section class="about-text">
-                <p>
-                    I’m a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. I
-                    specialize in building scalable web applications, RESTful APIs, and modern backend solutions using
-                    Laravel, MySQL, and tools like Livewire, InertiaJS, and Tailwind CSS.
-
-                    With fluency in PHP, JavaScript, and experience integrating frontend frameworks like Vue and React,
-                    I ensure smooth development of full-stack apps, SPAs, and complex systems. I’m also proficient in
-                    API development, Git, and tools like OpenAI’s ChatGPT API.
-
-                    I bring additional experience with Node.js, SQLite, and Docker, and have worked with cloud services
-                    like AWS. My workflow is rooted in clean, maintainable code and a solid understanding of backend
-                    architecture.
-
-                </p>
-            </section>
-
-
-            <!--
-              - service
-            -->
-
-            <section class="service">
-
-                <h3 class="h3 service-title">Skills</h3>
-
-                <ul class="service-list">
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path
-                                        d="M505.57 234.62c-3.28-3.53-26.82-32.29-39.51-47.79-6.75-8.24-12.08-14.75-14.32-17.45l-.18-.22-.2-.21c-5.22-5.83-12.64-12.51-23.78-12.51a39.78 39.78 0 00-5.41.44c-.37.05-.75.11-1.15.15-2.45.27-10.06 1.5-28.14 4.48-14 2.29-35.11 5.77-38.31 6.07l-.71.06-.69.13c-10 1.78-16.62 6.22-19.56 13.19-1.55 3.68-3.22 11.15 2.94 19.86 1.53 2.22 6.83 9.56 15.94 22.17 6.06 8.4 12.87 17.82 18.75 26L259.9 275 150.66 96.05l-.2-.34-.23-.33-.44-.65C145.32 88.17 139.76 80 123.7 80c-1.13 0-2.31 0-3.63.11-4.6.25-21.42 1.57-40.89 3.11-21.49 1.69-50.9 4-54.72 4.1h-.73l-.79.08c-9.14.89-15.77 4.6-19.7 11-6.55 10.69-1.42 22.69.26 26.63C6.87 133 37.56 197.7 64.63 254.81c18 37.94 36.58 77.17 38.1 80.65a34.85 34.85 0 0032.94 21.59 46.62 46.62 0 009.86-1.1h.21l.2-.05c13.86-3.38 57.83-14.54 89.2-22.59 1.9 3.32 3.9 6.83 6 10.44 21.93 38.5 37.9 66.35 43.16 73.46C287 421 295 432 310.06 432c5.46 0 10.46-1.4 15.74-2.89l1.53-.43h.12c10.53-3 150.69-52.16 157.87-55.35l.22-.1c5.44-2.41 13.66-6.05 16.18-15.4 1.65-6.12.18-12.33-4.38-18.46l-.07-.09-.07-.09c-.85-1.1-4-5.21-8.27-10.9-9.13-12.07-23.88-31.57-36.84-48.54 17.37-4.5 38.8-10.11 43.38-11.55 11.47-3.43 14.94-10.69 16-14.73.79-3.15 1.82-11.2-5.9-18.85zm-320 58.19c-17.81 4.17-30.22 7.08-37.89 8.9-6.67-13.34-19.74-39.65-32.5-65.33-29.74-59.92-45.1-90.77-53.18-106.9l8.15-.7c13.34-1.15 31.61-2.72 41.78-3.57 16.76 28.26 74.32 125.3 96.3 162.3zM427.58 172zM310.06 416.4zm53.67-56.95c-24.21 8-37.33 12.37-44.42 14.74-6.3-10.34-20.16-33.52-32.47-54.19l115.7-29.48c5 6.81 14.57 19.72 33.46 44.93-18.07 6.04-48.2 16.02-72.27 24zm55.87-121.63l-23.76-31.53c13.67-2.39 21.54-3.77 26.15-4.6l12 14.88 11.94 14.82c-8.2 1.99-17.74 4.32-26.33 6.43z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Laravel</h4>
-
-                            <p class="service-item-text">
-                                Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                            <svg class="w-14 fill-current text-yellow-500 transform -translate-y-3" id="Layer_1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 viewBox="0 0 512 512" xml:space="preserve">
-<g>
-    <g>
-        <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-    </g>
-</g>
-                                <g>
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g id="SVGCleanerId_1">
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M433.885,118.859c-141.87-7.93-215.93-9.866-215.93-9.866c-62.185,0-112.923,49.933-114.238,111.812
-			c-0.194,0.785-2.538,31.811-6.87,42.615c-7.104,17.684-17.949,28.661-28.315,28.661c-8.939,0-18.438-8.276-25.4-22.159
-			c-1.784-3.547-5.361-5.749-9.326-5.749H10.455c-3.139,0-6.085,1.386-8.073,3.812c-1.988,2.405-2.783,5.555-2.191,8.623
-			c3.985,20.487,14.015,39.129,28.244,52.522c14.779,13.903,35.98,21.251,55.193,21.251c20.069-0.591,39.017-8.246,54.938-22.271
-			c13.597-11.976,24.187-28.244,30.404-46.478c0.622,0.031,4.943,0.561,11.935-1.029l10.182,89.042
-			c0.591,5.147,4.943,9.041,10.121,9.041h33.095l1.243,14.973c0.438,5.28,4.852,9.347,10.152,9.347h46.662
-			c5.361,0,9.805-4.148,10.172-9.499l4.383-64.56c20.406,3.292,40.454,4.943,60.523,4.943c8.052,0,16.104-0.265,24.187-0.795
-			l4.862,36.734c0.673,5.066,4.994,8.857,10.111,8.857h32.545l1.814,15.33c0.612,5.127,4.964,8.99,10.121,8.99h50.728
-			c5.636,0,10.192-4.566,10.192-10.193V200.226C512,156.368,477.662,121.305,433.885,118.859z M415.528,358.303l-3.578-27.071
-			c7.002-0.836,14.086-1.896,21.18-3.129l3.588,30.201H415.528z M491.615,382.622L491.615,382.622h-31.475l-11.864-99.877
-			c-0.662-5.586-5.738-9.581-11.324-8.919c-5.596,0.663-9.581,5.738-8.919,11.324l2.691,22.699
-			c-10.498,1.845-20.956,3.262-31.179,4.189c-30.486,2.762-60.442,1.61-91.315-3.527l1.427-23.953
-			c0.336-5.626-3.945-10.447-9.561-10.784c-5.606-0.336-10.447,3.945-10.784,9.561l-1.947,32.524l-4.526,66.761h-27.754
-			l-8.276-89.43c-0.459-5.606-5.382-9.785-10.998-9.316c-5.606,0.459-9.775,5.382-9.316,10.998l5.973,63.428h-22.169l-10.621-92.915
-			c-0.642-5.596-5.677-9.612-11.283-8.969c-1.427,0.163-2.742,0.612-3.914,1.284c-6.167,3.486-13.342,4.475-20.232,2.813
-			c-0.01,0-0.02,0-0.02,0c-5.463-1.396-11.008,1.896-12.404,7.349c-4.546,17.806-14.045,33.768-26.735,44.949
-			c-12.18,10.743-26.552,16.644-41.677,17.174c-0.071,0.01-0.143,0.01-0.214,0.01c-13.862,0-29.558-5.84-40.444-16.084
-			c-8.144-7.665-14.545-17.643-18.612-28.845h3.465c10.61,17.827,25.278,27.907,40.923,27.907c19.366,0,37.203-15.615,47.701-41.769
-			c5.341-13.281,8.001-49.301,7.858-49.984c1.101-50.83,42.778-91.845,93.863-91.845c0,0,34.971,0.642,35.042,0.652
-			c5.106,0.255,9.907,1.926,14.259,4.964l9.092,6.37c12.731,8.888,20.589,22.882,21.557,38.385
-			c0.958,15.503-5.096,30.374-16.624,40.791l-35.97,32.484c-4.505,4.067-10.478,4.954-15.972,2.385
-			c-5.504-2.569-8.643-7.716-8.419-13.78c0.01-0.204,0.01-0.418,0.01-0.622l-0.408-17.969c-0.133-5.626-4.77-10.07-10.427-9.958
-			c-5.626,0.122-10.08,4.791-9.958,10.417l0.408,17.694c-0.408,14.168,7.288,26.674,20.171,32.688
-			c4.852,2.273,9.938,3.384,14.973,3.384c8.399,0,16.634-3.109,23.28-9.112l35.97-32.484c16.165-14.596,24.666-35.44,23.31-57.18
-			c-1.111-17.715-8.633-34.023-21.037-46.203l135.694,6.931c0.031,0,0.071,0.01,0.112,0.01
-			c32.861,1.315,58.597,28.111,58.597,61.003V382.622z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path
-                                            d="M83.627,350.383C82.832,350.577,84.483,350.383,83.627,350.383L83.627,350.383z"/>
-                                </g>
-                            </g>
-</svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">PHP</h4>
-
-                            <p class="service-item-text">
-                                Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <img src="assets/icon-photo.svg" alt="camera icon" width="40">
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">MySQL | PostgreSQL | SQLite</h4>
-
-                            <p class="service-item-text">
-                                Proficient with relational databases including MySQL, PostgreSQL, and SQLite for web applications.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M32 32v448h448V32zm240 348c0 43.61-25.76 64.87-63.05 64.87-33.68 0-53.23-17.44-63.15-38.49l34.28-20.75c6.61 11.73 11.63 21.65 26.06 21.65 12 0 21.86-5.41 21.86-26.46V240h44zm99.35 63.87c-39.09 0-64.35-17.64-76.68-42L329 382c9 14.74 20.75 24.56 41.5 24.56 17.44 0 27.57-7.72 27.57-19.75 0-14.43-10.43-19.54-29.68-28l-10.52-4.52c-30.38-12.92-50.52-29.16-50.52-63.45 0-31.57 24.05-54.63 61.64-54.63 26.77 0 46 8.32 59.85 32.68L396 290c-7.22-12.93-15-18-27.06-18-12.33 0-20.15 7.82-20.15 18 0 12.63 7.82 17.74 25.86 25.56l10.52 4.51c35.79 15.34 55.94 31 55.94 66.16.01 37.9-29.76 57.64-69.76 57.64z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">JS | Node | Vue | React | React Native | Alpine</h4>
-
-                            <p class="service-item-text">
-                                Skilled in JavaScript ecosystem including Node.js, Vue.js, React, React Native, and Alpine.js for modern web and mobile development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M64 32l34.94 403.21L255.77 480 413 435.15 448 32zm308 132H188l4 51h176l-13.51 151.39L256 394.48l-98.68-28-6.78-77.48h48.26l3.42 39.29L256 343.07l53.42-14.92L315 264H148l-12.59-149.59H376.2z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">HTML | CSS</h4>
-
-                            <p class="service-item-text">
-                                Proficient in HTML5 and CSS3 for modern web development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M64 32l35 403.22L255.77 480 413 435.15 448 32zm290.68 334.9L256.07 395l-98.46-28.24-6.75-77.76h48.26l3.43 39.56 53.59 15.16.13.28 53.47-14.85 5.64-64.15H203l-4-50h120.65l4.35-51H140l-4-49h240.58z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Tailwind CSS | Bootstrap | SASS | LESS | SCSS</h4>
-
-                            <p class="service-item-text">
-                                Experienced with modern CSS frameworks and preprocessors for responsive design.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48zm-6 321.4c-5.5 1.4-11.2-.6-14.9-5.1l-38.5-44.9V348c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V164c0-6.6 5.4-12 12-12h28c6.6 0 12 5.4 12 12v90.4l38.5-44.9c3.7-4.5 9.4-6.5 14.9-5.1 5.5 1.4 9.4 6.1 9.4 11.7V358.1c0 5.6-3.9 10.3-9.4 11.7z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">LLM | AI</h4>
-
-                            <p class="service-item-text">
-                                Experience with Large Language Models and AI integration for enhanced application functionality.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48zm-6 321.4c-5.5 1.4-11.2-.6-14.9-5.1l-38.5-44.9V348c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V164c0-6.6 5.4-12 12-12h28c6.6 0 12 5.4 12 12v90.4l38.5-44.9c3.7-4.5 9.4-6.5 14.9-5.1 5.5 1.4 9.4 6.1 9.4 11.7V358.1c0 5.6-3.9 10.3-9.4 11.7z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Cursor AI</h4>
-
-                            <p class="service-item-text">
-                                Proficient with Cursor AI for enhanced development workflow and code generation.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M349.13 136.86c-40.32 0-57.36 19.24-85.44 19.24-28.79 0-50.75-19.1-85.69-19.1-34.2 0-70.67 20.88-93.83 56.45-32.52 50.16-27 144.63 25.67 225.11 18.84 28.81 44 61.12 77 61.47h.6c28.68 0 37.2-18.78 76.67-19h.6c38.88 0 46.68 18.89 75.24 18.89h.6c33-.35 59.51-36.15 78.35-64.85 13.56-20.64 18.6-31 29-54.35-76.19-28.92-88.43-136.93-13.08-178.34-23-28.8-55.32-45.48-85.79-45.48z"/>
-                                <path d="M340.25 32c-24 1.63-52 16.91-68.4 36.86-14.88 18.08-27.12 44.9-22.32 70.91h1.92c25.56 0 51.72-15.39 67-35.11 14.72-18.77 25.88-45.37 21.8-72.66z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Swift | Apple Ecosystem</h4>
-
-                            <p class="service-item-text">
-                                Experience with Swift programming language and Apple ecosystem development for iOS, macOS, watchOS, and tvOS applications.
-                            </p>
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </section>
-
-
-            <!--
-              - testimonials
-            -->
-
-            <section class="testimonials">
-
-                <h3 class="h3 testimonials-title">Testimonials</h3>
-
-                <ul class="testimonials-list has-scrollbar">
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-1.png" alt="Daniel lewis" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Benjamin Bagehorn
-                                (Nuucap)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    We are working with Oto for over a year now. In more than 870 hours he constantly
-                                    proved
-                                    his willing to get things done. He is a very kind and reliable person and always
-                                    motivated to find the best solution. Oto has strong skills in PHP, Laravel & JS. We
-                                    definitely we want go on working with Oto.
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-4.png" alt="Jessica miller" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Adrian St Vaughan (Ascendia
-                                LTD)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    Working with Oto was a fantastic experience. He understood what we needed quickly,
-                                    he
-                                    delivered accurate, prompt work. He was diligent in suggesting better options to
-                                    consider. We worked together on a number of projects over the course of over a year
-                                    and
-                                    we had no complaints at all about the quality or timeliness of our deliverables. We
-                                    would recommend without hesitation.
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-4.png" alt="Jessica miller" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Quincy Chapman (DewQ
-                                Finance)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    Well, as always this is the best freelancer I have ever worked with for web
-                                    development projects. I just didn't have enough work to keep him going. I would hire
-                                    Oto again immediately. This is the guy to do your job great!
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box h-20 w-20 flex justify-center items-center">
-                                <svg width="50" viewBox="0 0 512 153" xmlns="http://www.w3.org/2000/svg"
-                                     preserveAspectRatio="xMidYMid">
-                                    <path d="M140.107 96.628c-8.321 0-16.118-3.523-23.202-9.258l1.725-8.096.075-.3c1.536-8.62 6.409-23.089 21.402-23.089 11.244 0 20.39 9.146 20.39 20.39-.038 11.207-9.183 20.353-20.39 20.353zm0-61.395c-19.154 0-33.996 12.444-40.03 32.909-9.221-13.831-16.193-30.435-20.278-44.416H59.184v53.636c0 10.57-8.621 19.19-19.191 19.19-10.57 0-19.19-8.62-19.19-19.19V23.726H.186v53.636c-.075 21.965 17.804 39.993 39.768 39.993 21.965 0 39.844-18.028 39.844-39.993v-8.995c4.01 8.358 8.92 16.791 14.88 24.288l-12.632 59.37h21.103l9.145-43.066c8.021 5.135 17.242 8.359 27.812 8.359 22.601 0 41.005-18.516 41.005-41.118 0-22.564-18.404-40.967-41.005-40.967z"
-                                          fill="#6FDA44"/>
-                                    <path d="M244.043 37.557l13.306 53.636 14.656-53.636h17.466l-22.526 77.512h-17.467l-13.83-53.974-13.794 53.936h-17.466L181.86 37.52h17.467l14.655 53.636 13.306-53.636h16.754v.038zm87.22-2.324c-22.676 0-41.042 18.403-41.042 41.042 0 22.677 18.403 41.043 41.042 41.043 22.677 0 41.08-18.366 41.08-41.043 0-22.676-18.403-41.042-41.08-41.042zm0 65.218c-13.343 0-24.138-10.795-24.138-24.138 0-13.344 10.832-24.138 24.138-24.138 13.344 0 24.138 10.794 24.138 24.138 0 13.306-10.794 24.138-24.138 24.138zm90.968-45.54c-11.731 0-21.214 9.52-21.214 21.214v38.906h-17.58V37.557h17.58v11.919s7.496-11.957 22.901-11.957h5.397v17.392h-7.084zm58.997 18.366c12.48-7.047 20.952-20.428 20.952-35.758H484.6c0 12.931-10.494 23.426-23.425 23.426h-2.362V.15h-17.578V115.03h17.578V78.524h2.1c1.724 0 3.973 1.125 4.985 2.511l24.962 33.996h21.065l-30.697-41.754z"/>
-                                </svg>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Upwork</h4>
-
-                            <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank"
-                               class="testimonials-text">
-                                <p>
-                                    All these reviews are from my Upwork profile. More <span class="text-yellow-500">here</span>.
-                                </p>
-                            </a>
-
-                        </div>
-                    </li>
-                </ul>
-
-            </section>
-
-        </article>
-
-
-        <article
-                class="portfolio"
-                data-page="music"
-                :class="page === 'music' ? 'active' : ''"
-        >
-
-            <header>
-                <h2 class="h2 article-title">Music</h2>
-            </header>
-
-            <section class="projects min-h-[600px]"
-                     x-init="$watch('page', async (value) => {
-                    if (value === 'music') {
-                        loading = true;
-                        try {
-                            const response = await fetch('./music.json');
-                            albums = await response.json();
-                            currentPage = 1;
-                        } catch (error) {
-                            console.error('Error loading music:', error);
-                        } finally {
-                            loading = false;
-                        }
-                    }
-                })"
-            >
-                <template x-if="loading">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+        <div class="content-wrapper">
+            <button class="big-arrow arrow-left" @click="prevMusic()" :disabled="currentMusicIndex === 0">
+                ‹
+            </button>
+            
+            <button class="big-arrow arrow-right" @click="nextMusic()" :disabled="currentMusicIndex === musicData.length - 1">
+                ›
+            </button>
+            
+            <template x-if="loading">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading music...</p>
+                </div>
+            </template>
+            
+            <template x-if="!loading && currentMusic">
+                <div class="content-slide">
+                    <img :src="currentMusicImage" :alt="currentMusicName" class="music-cover">
+                    
+                    <div class="music-info">
+                        <h1 class="music-title" x-text="currentMusicName"></h1>
+                        <p class="music-artist" x-text="currentMusicArtist"></p>
                     </div>
-                </template>
-
-                <template x-if="!loading && !albums.length">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <p class="text-gray-400">No albums found</p>
-                    </div>
-                </template>
-
-                <template x-if="albums.length">
-                    <div>
-                        <ul class="project-list">
-                        <template x-for="album in albums.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="album.id">
-                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <a :href="`/music/${album.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim()}/`" class="h-full block">
-                                    <figure class="project-img h-[200px] w-full">
-                                        <div class="project-item-icon-box">
-                                            <ion-icon name="eye-outline"></ion-icon>
-                                        </div>
-                                        <img :src="album.image" :alt="album.name" loading="lazy" class="w-full h-full object-cover" />
-                                    </figure>
-                                    <h3 class="project-title" x-text="album.name"></h3>
-                                    <p class="project-category" x-text="album.artists"></p>
-                                </a>
-                            </li>
-                        </template>
-                                            </ul>
-
-                        <!-- Pagination -->
-                        <div class="pagination-wrapper" x-show="albums.length > itemsPerPage">
-                        <div class="pagination">
-                            <button 
-                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
-                                :disabled="currentPage === 1"
-                                class="pagination-btn"
-                                :class="currentPage === 1 ? 'disabled' : ''"
-                            >
-                                <ion-icon name="chevron-back-outline"></ion-icon>
-                                Previous
-                            </button>
-                            
-                            <div class="pagination-info">
-                                <span x-text="`Page ${currentPage} of ${Math.ceil(albums.length / itemsPerPage)}`"></span>
-                            </div>
-                            
-                            <button 
-                                x-on:click="currentPage = Math.min(Math.ceil(albums.length / itemsPerPage), currentPage + 1)" 
-                                :disabled="currentPage >= Math.ceil(albums.length / itemsPerPage)"
-                                class="pagination-btn"
-                                :class="currentPage >= Math.ceil(albums.length / itemsPerPage) ? 'disabled' : ''"
-                            >
-                                Next
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </template>
-            </section>
-
-        </article>
-
-
-        <article
-                class="portfolio"
-                data-page="projects"
-                :class="page === 'projects' ? 'active' : ''"
-        >
-
-            <header>
-                <h2 class="h2 article-title">Projects</h2>
-            </header>
-
-            <section class="projects min-h-[600px]"
-                     x-init="$watch('page', async (value) => {
-                    if (value === 'projects') {
-                        loading = true;
-                        try {
-                            const response = await fetch('./projects.json');
-                            projects = await response.json();
-                            currentPage = 1;
-                        } catch (error) {
-                            console.error('Error loading projects:', error);
-                        } finally {
-                            loading = false;
-                        }
-                    }
-                })"
-            >
-                <template x-if="loading">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
-                    </div>
-                </template>
-
-                <template x-if="!loading && !projects.length">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <p class="text-gray-400">No projects found</p>
-                    </div>
-                </template>
-
-                <template x-if="projects.length">
-                    <div>
-                        <ul class="project-list">
-                        <template x-for="project in projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="project.id">
-                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <div class="h-full block">
-                                    <a :href="project.url" target="_blank" class="block">
-                                        <figure class="project-img h-[200px] w-full">
-                                            <div class="project-item-icon-box">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </div>
-                                            <img :src="project.image" :alt="project.name" loading="lazy" class="w-full h-full object-cover" />
-                                        </figure>
-                                        <h3 class="project-title" x-text="project.name"></h3>
-                                    </a>
-                                    <div class="project-category mt-2">
-                                        <template x-if="project.github_url">
-                                            <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400 text-sm">
-                                                <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
-                                                View on GitHub
-                                            </a>
-                                        </template>
-                                        <template x-if="!project.github_url">
-                                            <div class="text-sm opacity-0">Placeholder</div>
-                                        </template>
-                                    </div>
-                                </div>
-                            </li>
-                        </template>
-                                            </ul>
-
-                        <!-- Pagination -->
-                        <div class="pagination-wrapper" x-show="projects.length > itemsPerPage">
-                        <div class="pagination">
-                            <button 
-                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
-                                :disabled="currentPage === 1"
-                                class="pagination-btn"
-                                :class="currentPage === 1 ? 'disabled' : ''"
-                            >
-                                <ion-icon name="chevron-back-outline"></ion-icon>
-                                Previous
-                            </button>
-                            
-                            <div class="pagination-info">
-                                <span x-text="`Page ${currentPage} of ${Math.ceil(projects.length / itemsPerPage)}`"></span>
-                            </div>
-                            
-                            <button 
-                                x-on:click="currentPage = Math.min(Math.ceil(projects.length / itemsPerPage), currentPage + 1)" 
-                                :disabled="currentPage >= Math.ceil(projects.length / itemsPerPage)"
-                                class="pagination-btn"
-                                :class="currentPage >= Math.ceil(projects.length / itemsPerPage) ? 'disabled' : ''"
-                            >
-                                Next
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </template>
-            </section>
-
-        </article>
+                </div>
+            </template>
+        </div>
     </div>
-</main>
+    
+    <!-- Audio Player -->
+    <div class="spotify-section">
+        <template x-if="!loading && currentMusic">
+            <div class="audio-player">
+                <!-- Waveform Background -->
+                <div class="waveform-background" x-show="isPlaying">
+                    <!-- Style 1: Classic Bars - More bars -->
+                    <div class="waveform-bar classic" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 50ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 100ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 150ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 250ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 350ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 450ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 500ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 550ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 650ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 700ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 750ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 850ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 950ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1050ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1100ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1150ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1250ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1300ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1350ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1400ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1450ms;"></div>
+                    <div class="waveform-bar classic" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 2: Dots - More dots -->
+                    <div class="waveform-dot" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 100ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 500ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 700ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1100ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1300ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1400ms;"></div>
+                    <div class="waveform-dot" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 3: Pulse - More pulses -->
+                    <div class="waveform-pulse" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 150ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 450ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 750ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1050ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1350ms;"></div>
+                    <div class="waveform-pulse" style="animation-delay: 1500ms;"></div>
+                    
+                    <!-- Style 4: Equalizer - More bars -->
+                    <div class="waveform-eq" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 80ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 160ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 240ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 320ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 480ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 560ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 640ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 720ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 880ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 960ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1040ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1120ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1280ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1360ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1440ms;"></div>
+                    <div class="waveform-eq" style="animation-delay: 1520ms;"></div>
+                    
+                    <!-- Style 5: Rings -->
+                    <div class="waveform-ring" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 200ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 400ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 800ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1000ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-ring" style="animation-delay: 1400ms;"></div>
+                    
+                    <!-- Style 6: Stars -->
+                    <div class="waveform-star" style="animation-delay: 0ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 300ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 600ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 900ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 1200ms;"></div>
+                    <div class="waveform-star" style="animation-delay: 1500ms;"></div>
+                </div>
+                
+                <!-- Player Content -->
+                <div class="player-content">
+                    <div class="progress-container" @click="seekTo($event)">
+                        <div class="progress-bar" :style="`width: ${duration > 0 ? (currentTime / duration) * 100 : 0}%`"></div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <span x-text="formatTime(currentTime)"></span>
+                        <span x-text="formatTime(duration)"></span>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button class="play-pause-btn" @click="togglePlayPause()" x-text="isPlaying ? '⏸' : '▶'"></button>
+                        <div class="volume-control">
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" :value="volume" @input="setVolume($event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    
+    <!-- Dock -->
+    <div class="dock">
+        <div class="dock-container">
+            <div class="dock-scroll">
+                <template x-for="(music, index) in musicData" :key="index">
+                    <div class="dock-item" :class="{ 'active': index === currentMusicIndex }" @click="selectMusic(index)">
+                        <img :src="music.image" :alt="music.name" class="dock-cover">
+                        <div class="dock-title" x-text="music.name"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const alpineComponent = document.querySelector('[x-data]').__x.$data;
+            
+            if (e.key === 'ArrowLeft') {
+                alpineComponent.prevMusic();
+            } else if (e.key === 'ArrowRight') {
+                alpineComponent.nextMusic();
+            }
+        });
+    </script>
 </body>
 </html>
